@@ -10,13 +10,9 @@
 <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
 <style>
   :root{
-    --card-h: 120px;
-    --card-w: 76px;
-    --digit-fs: 78px;
+    --digit-fs: 96px;
     --ink: #0a0b10;
     --ink-2: #12141c;
-    --card-bg: #1b1d24;
-    --card-edge: #26282f;
     --ivory: #f3edde;
     --amber: #e8a33d;
     --amber-dim: rgba(232,163,61,0.35);
@@ -47,124 +43,87 @@
     font-size: clamp(13px, 1.6vw, 16px);
     letter-spacing: 0.14em;
     color: var(--muted);
-    text-transform: none;
-    margin-bottom: clamp(20px, 4vh, 36px);
+    margin-bottom: clamp(24px, 5vh, 44px);
     font-weight:500;
   }
 
   .board-wrap{
+    --mx: 0;
+    --my: 0;
+    --axis-glow: 0;
     display:flex;
     flex-direction:column;
     align-items:center;
+    perspective: 900px;
   }
 
   .board{
     display:flex;
-    align-items:flex-end;
-    gap: 6px;
+    align-items:baseline;
+    transform-style: preserve-3d;
+    transform: rotateY(calc(var(--mx) * 9deg)) rotateX(calc(var(--my) * -7deg));
+    transition: transform .25s cubic-bezier(.2,.7,.3,1);
+    will-change: transform;
+  }
+
+  .digits{
+    position:relative;
+    display:flex;
+  }
+
+  .char{
+    font-family:'Space Mono', monospace;
+    font-weight:700;
+    font-size: var(--digit-fs);
+    line-height:1;
+    color: var(--ivory);
+    letter-spacing: 0.02em;
+    display:inline-block;
+    padding: 0 0.06em;
+    user-select:none;
   }
 
   .suffix{
     font-family:'Space Mono', monospace;
     font-weight:700;
-    font-size: calc(var(--digit-fs) * 0.42);
+    font-size: calc(var(--digit-fs) * 0.4);
     color: var(--amber);
-    margin-left: 10px;
-    margin-bottom: calc(var(--card-h) * 0.16);
-    letter-spacing: -0.02em;
+    margin-left: 6px;
+    align-self:flex-end;
+    padding-bottom: 0.14em;
     user-select:none;
   }
 
-  .flip{
-    position:relative;
-    width: var(--card-w);
-    height: var(--card-h);
-    perspective: 400px;
-    filter: drop-shadow(0 10px 24px rgba(0,0,0,0.45));
-  }
-
-  .half, .flap{
+  .mirror-axis{
     position:absolute;
-    left:0; width:100%;
-    height: calc(var(--card-h) / 2);
-    overflow:hidden;
-    background: linear-gradient(180deg, var(--card-bg), #17181e);
-    border: 1px solid var(--card-edge);
+    top: 6%;
+    bottom: 6%;
+    left: 50%;
+    width: 2px;
+    background: var(--amber);
+    transform: translateX(-50%) scaleY(1);
+    transform-origin:center;
+    opacity: .35;
+    border-radius:2px;
+    pointer-events:none;
   }
-
-  .half-top, .flap-front{ top:0; border-radius: 10px 10px 0 0; border-bottom:none; }
-  .half-bottom, .flap-back{ bottom:0; border-radius: 0 0 10px 10px; border-top:none; }
-
-  .half-top::after{
-    content:'';
-    position:absolute; left:0; right:0; bottom:0;
-    height:1px; background: rgba(0,0,0,0.55);
-  }
-
-  .flip::before{
-    content:'';
-    position:absolute; left:0; right:0; top:calc(50% - 0.5px);
-    height:1px; background: rgba(0,0,0,0.6); z-index:5; pointer-events:none;
-  }
-
-  .num{
-    position:absolute; left:0; width:100%;
-    text-align:center;
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size: var(--digit-fs);
-    line-height: var(--card-h);
-    color: var(--ivory);
-    user-select:none;
-  }
-
-  .half-top .num, .flap-front .num{ top:0; }
-  .half-bottom .num, .flap-back .num{ top: calc(var(--card-h) / -2); }
-
-  .flap-front{
-    transform-origin: bottom;
-    backface-visibility: hidden;
-    z-index:3;
-    transform: rotateX(0deg);
-  }
-  .flap-back{
-    transform-origin: top;
-    backface-visibility: hidden;
-    z-index:2;
-    transform: rotateX(90deg);
-  }
-
-  .flip.flipping .flap-front{
-    animation: flipFrontDown var(--flip-dur, 260ms) cubic-bezier(.4,0,.6,1) forwards;
-  }
-  .flip.flipping .flap-back{
-    animation: flipBackUp var(--flip-dur, 260ms) cubic-bezier(.4,0,.6,1) forwards;
-    animation-delay: var(--flip-dur, 260ms);
-  }
-
-  @keyframes flipFrontDown{ from{ transform: rotateX(0deg); } to{ transform: rotateX(-90deg); } }
-  @keyframes flipBackUp{ from{ transform: rotateX(90deg); } to{ transform: rotateX(0deg); } }
 
   .reflection{
-    margin-top: 10px;
-    transform: scaleY(-1);
-    opacity: 0.28;
+    margin-top: 8px;
+    transform: scaleY(-1) rotateY(calc(var(--mx) * 9deg)) rotateX(calc(var(--my) * 7deg));
+    transition: transform .25s cubic-bezier(.2,.7,.3,1);
+    opacity: 0.22;
     -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 65%);
     mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 65%);
     pointer-events:none;
     filter: blur(0.3px);
+    will-change: transform;
   }
-  .reflection .num, .reflection .suffix{ color: var(--ivory); }
 
-  .tagline{
-    margin-top: clamp(28px, 5vh, 48px);
-    font-size: clamp(14px, 1.8vw, 17px);
-    color: var(--muted);
-    letter-spacing: 0.02em;
-  }
+  .tagline-space{ height: clamp(28px, 5vh, 48px); }
 
   .cta{
-    margin-top: clamp(14px, 2.4vh, 20px);
+    margin-top: clamp(36px, 6vh, 60px);
     display:inline-flex;
     align-items:center;
     gap:10px;
@@ -175,17 +134,10 @@
     text-decoration:none;
     padding: 10px 6px;
     border-bottom: 1px solid var(--amber-dim);
-    transition: border-color .25s ease, transform .25s ease, color .25s ease;
+    transition: border-color .25s ease, transform .25s ease;
   }
-  .cta:hover{
-    border-color: var(--amber);
-    transform: translateY(-2px);
-  }
-  .cta:focus-visible{
-    outline: 2px solid var(--amber);
-    outline-offset: 4px;
-    border-radius: 4px;
-  }
+  .cta:hover{ border-color: var(--amber); transform: translateY(-2px); }
+  .cta:focus-visible{ outline: 2px solid var(--amber); outline-offset: 4px; border-radius: 4px; }
   .cta .arrow{ transition: transform .25s ease; }
   .cta:hover .arrow{ transform: translateX(4px); }
 
@@ -200,25 +152,84 @@
   }
 
   @media (max-width: 640px){
-    :root{
-      --card-h: 74px;
-      --card-w: 44px;
-      --digit-fs: 48px;
-    }
-    .board{ gap:4px; }
-    .suffix{ margin-left:6px; }
+    :root{ --digit-fs: 52px; }
   }
-
   @media (max-width: 380px){
-    :root{
-      --card-h: 60px;
-      --card-w: 36px;
-      --digit-fs: 40px;
+    :root{ --digit-fs: 42px; }
+  }
+
+  /* ---- Animation: characters materialize from both ends toward the center,
+     mirroring the fact that 102201 reads the same forward and backward ---- */
+  @media (prefers-reduced-motion: no-preference){
+
+    .eyebrow, .cta{
+      opacity:0;
+      animation: fadeUp .7s ease-out forwards;
+    }
+    .eyebrow{ animation-delay: .05s; }
+    .cta{ animation-delay: 1.9s; }
+    .suffix{ opacity:0; animation: fadeUp .7s ease-out 1.9s forwards; }
+
+    .char{
+      opacity:0;
+      animation: materialize .55s cubic-bezier(.2,.8,.2,1) forwards;
+    }
+    .char:nth-child(1), .char:nth-child(6){ animation-delay: .15s; }
+    .char:nth-child(2), .char:nth-child(5){ animation-delay: .48s; }
+    .char:nth-child(3), .char:nth-child(4){ animation-delay: .81s; }
+
+    .mirror-axis{
+      opacity:0;
+      transform: translateX(-50%) scaleY(0);
+      animation: axisReveal .6s ease-out 1.2s forwards,
+                 axisPulse 4s ease-in-out 1.95s infinite;
     }
   }
 
-  @media (prefers-reduced-motion: reduce){
-    .flap-front, .flap-back{ animation: none !important; }
+  @keyframes materialize{
+    0%{
+      opacity:0;
+      transform: scale(.4);
+      filter: blur(6px);
+      color: var(--amber);
+      text-shadow: 0 0 22px var(--amber);
+    }
+    55%{
+      opacity:1;
+      transform: scale(1.08);
+      filter: blur(0px);
+      color: var(--amber);
+      text-shadow: 0 0 14px var(--amber-dim);
+    }
+    100%{
+      opacity:1;
+      transform: scale(1);
+      filter: blur(0px);
+      color: var(--ivory);
+      text-shadow: none;
+    }
+  }
+
+  @keyframes axisReveal{
+    0%{ opacity:0; transform: translateX(-50%) scaleY(0); box-shadow: none; }
+    45%{ opacity:1; transform: translateX(-50%) scaleY(1.25); box-shadow: 0 0 28px var(--amber); }
+    100%{ opacity:.35; transform: translateX(-50%) scaleY(1); box-shadow: none; }
+  }
+
+  @keyframes axisPulse{
+    0%, 100%{
+      opacity: calc(.3 + var(--axis-glow, 0) * .55);
+      box-shadow: 0 0 calc(6px + var(--axis-glow, 0) * 30px) var(--amber);
+    }
+    50%{
+      opacity: calc(.4 + var(--axis-glow, 0) * .55);
+      box-shadow: 0 0 calc(10px + var(--axis-glow, 0) * 34px) var(--amber);
+    }
+  }
+
+  @keyframes fadeUp{
+    from{ opacity:0; transform: translateY(10px); }
+    to{ opacity:1; transform: translateY(0); }
   }
 </style>
 </head>
@@ -228,11 +239,21 @@
     <div class="eyebrow">有些域名，正着念、倒着念，都是它</div>
 
     <div class="board-wrap">
-      <div class="board" id="board"></div>
-      <div class="board reflection" id="boardReflection" aria-hidden="true"></div>
+      <div class="board">
+        <div class="digits">
+          <span class="char">1</span><span class="char">0</span><span class="char">2</span><span class="char">2</span><span class="char">0</span><span class="char">1</span>
+          <div class="mirror-axis" aria-hidden="true"></div>
+        </div>
+        <span class="suffix">.com</span>
+      </div>
+      <div class="board reflection" aria-hidden="true">
+        <div class="digits">
+          <span class="char">1</span><span class="char">0</span><span class="char">2</span><span class="char">2</span><span class="char">0</span><span class="char">1</span>
+        </div>
+        <span class="suffix">.com</span>
+      </div>
     </div>
 
-    <div class="tagline">网站建设中，先记住这一串数字</div>
     <a class="cta" href="https://www.102201.com" target="_blank" rel="noopener">
       www.102201.com <span class="arrow">→</span>
     </a>
@@ -242,123 +263,38 @@
 
 <script>
 (function(){
-  var TARGET = ['1','0','2','2','0','1'];
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+  if (reduceMotion) return;
 
-  function buildBoard(container, withSuffix){
-    var cols = [];
-    TARGET.forEach(function(d){
-      var flip = document.createElement('div');
-      flip.className = 'flip';
-      flip.innerHTML =
-        '<div class="half half-top"><span class="num">'+d+'</span></div>' +
-        '<div class="half half-bottom"><span class="num">'+d+'</span></div>' +
-        '<div class="flap flap-front"><span class="num">'+d+'</span></div>' +
-        '<div class="flap flap-back"><span class="num">'+d+'</span></div>';
-      container.appendChild(flip);
-      cols.push({
-        el: flip,
-        top: flip.querySelector('.half-top .num'),
-        bottom: flip.querySelector('.half-bottom .num'),
-        front: flip.querySelector('.flap-front .num'),
-        back: flip.querySelector('.flap-back .num'),
-        current: d
-      });
-    });
-    if (withSuffix){
-      var suf = document.createElement('div');
-      suf.className = 'suffix';
-      suf.textContent = '.com';
-      container.appendChild(suf);
-    }
-    return cols;
+  var wrap = document.querySelector('.board-wrap');
+  if (!wrap) return;
+
+  function setVars(mx, my, glow){
+    wrap.style.setProperty('--mx', mx.toFixed(3));
+    wrap.style.setProperty('--my', my.toFixed(3));
+    wrap.style.setProperty('--axis-glow', glow.toFixed(3));
   }
 
-  var board = document.getElementById('board');
-  var reflection = document.getElementById('boardReflection');
-  var cols = buildBoard(board, true);
-  buildBoard(reflection, true); // mirror copy, kept in visual sync below
-  var mirrorSpans = reflection.querySelectorAll('.half-top .num, .half-bottom .num, .flap-front .num, .flap-back .num');
+  function onMove(e){
+    var rect = wrap.getBoundingClientRect();
+    var cx = rect.left + rect.width / 2;
+    var cy = rect.top + rect.height / 2;
+    var halfW = rect.width / 2 || 1;
+    var halfH = rect.height / 2 || 1;
 
-  function syncMirror(){
-    var mCols = reflection.querySelectorAll('.flip');
-    cols.forEach(function(c, i){
-      var m = mCols[i];
-      if(!m) return;
-      m.querySelector('.half-top .num').textContent = c.current;
-      m.querySelector('.half-bottom .num').textContent = c.current;
-      m.querySelector('.flap-front .num').textContent = c.current;
-      m.querySelector('.flap-back .num').textContent = c.current;
-    });
+    var mx = Math.max(-1, Math.min(1, (e.clientX - cx) / halfW));
+    var my = Math.max(-1, Math.min(1, (e.clientY - cy) / halfH));
+    var glow = Math.max(0, 1 - Math.abs(mx)); // brightest when cursor is over the mirror line
+
+    setVars(mx, my, glow);
   }
 
-  function flipTo(col, digit, duration, cb){
-    if (col.current === digit){ if(cb) cb(); return; }
-    if (reduceMotion){
-      col.current = digit;
-      col.top.textContent = digit;
-      col.bottom.textContent = digit;
-      syncMirror();
-      if(cb) cb();
-      return;
-    }
-    col.el.style.setProperty('--flip-dur', duration + 'ms');
-    col.front.textContent = col.current;
-    col.back.textContent = digit;
-    col.el.classList.add('flipping');
-
-    setTimeout(function(){
-      col.current = digit;
-      col.top.textContent = digit;
-      col.bottom.textContent = digit;
-      syncMirror();
-      col.el.classList.remove('flipping');
-      // reset flaps for next animation without transition flash
-      col.front.textContent = digit;
-      col.back.textContent = digit;
-      if (cb) cb();
-    }, duration * 2 + 20);
+  function onLeave(){
+    setVars(0, 0, 0);
   }
 
-  var RAND = '0123456789';
-  function randomDigit(){ return RAND[Math.floor(Math.random()*RAND.length)]; }
-
-  function spinIn(col, target, steps, stepDur, landDur){
-    var i = 0;
-    function step(){
-      if (i < steps){
-        flipTo(col, randomDigit(), stepDur, function(){
-          i++; step();
-        });
-      } else {
-        flipTo(col, target, landDur);
-      }
-    }
-    step();
-  }
-
-  // initial cascading spin-up
-  cols.forEach(function(col, idx){
-    setTimeout(function(){
-      spinIn(col, TARGET[idx], reduceMotion ? 0 : 6, 90, 260);
-    }, idx * 130);
-  });
-
-  // idle ambient correction, like a board settling itself
-  function idleLoop(){
-    var wait = 3500 + Math.random() * 3500;
-    setTimeout(function(){
-      if (!reduceMotion){
-        var idx = Math.floor(Math.random() * cols.length);
-        var col = cols[idx];
-        flipTo(col, randomDigit(), 220, function(){
-          flipTo(col, TARGET[idx], 260);
-        });
-      }
-      idleLoop();
-    }, wait);
-  }
-  if (!reduceMotion) idleLoop();
+  window.addEventListener('mousemove', onMove, { passive: true });
+  window.addEventListener('mouseleave', onLeave);
 })();
 </script>
 
