@@ -2,1025 +2,236 @@
 <html lang="zh-CN">
 <head>
 <meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>102201</title>
-<meta name="description" content="102201.com — 正着念、倒着念，都是它。">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+<title>田忌赛马 · 102 vs 201 · 裁判X</title>
+<meta name="description" content="102营 vs 201营，田忌赛马策略对决。三场对阵，以弱胜强，裁判X全程裁决。">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1026'/%3E%3Ctext x='32' y='44' font-size='38' font-weight='bold' text-anchor='middle' fill='%23e879f9'%3EX%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Manrope:wght@400;500;700&display=swap" rel="stylesheet">
-<style>
-  :root{
-    --digit-fs: 96px;
-    --ink: #04060c;
-    --ink-2: #0a1220;
-    --ivory: #eaf0f8;
-    --amber: #9ec8f0;
-    --amber-dim: rgba(158,200,240,0.32);
-    --muted: rgba(176,196,220,0.58);
-    --nebula: rgba(40, 80, 150, 0.20);
-  }
-
-  *{ box-sizing:border-box; }
-
-  html,body{
-    margin:0; padding:0; height:100%;
-    background:
-      radial-gradient(ellipse 80% 50% at 50% 40%, rgba(70, 130, 200, 0.10) 0%, transparent 55%),
-      radial-gradient(ellipse 42% 32% at 16% 78%, var(--nebula) 0%, transparent 62%),
-      radial-gradient(ellipse 36% 28% at 84% 16%, rgba(50, 100, 170, 0.12) 0%, transparent 58%),
-      radial-gradient(120% 140% at 50% 100%, var(--ink-2) 0%, var(--ink) 72%);
-    color: var(--ivory);
-    font-family: 'Manrope', sans-serif;
-    overflow:hidden;
-  }
-
-  .cosmos{
-    position:fixed;
-    inset:-12%;
-    pointer-events:none;
-    z-index:0;
-    background:
-      radial-gradient(circle at 38% 42%, rgba(80, 140, 210, 0.12), transparent 26%),
-      radial-gradient(circle at 72% 58%, rgba(40, 70, 140, 0.14), transparent 30%),
-      radial-gradient(circle at 50% 48%, rgba(180, 210, 255, 0.05), transparent 20%);
-    filter: blur(32px);
-    opacity:.9;
-  }
-
-  .vignette{
-    position:fixed;
-    inset:0;
-    pointer-events:none;
-    z-index:3;
-    background: radial-gradient(ellipse at 50% 45%, transparent 52%, rgba(2,4,10,0.55) 100%);
-  }
-
-  #particles{
-    position:fixed;
-    inset:0;
-    width:100%;
-    height:100%;
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .beam, .flash{
-    position:fixed;
-    pointer-events:none;
-    z-index:0;
-  }
-
-  .beam{
-    left:50%;
-    top:0;
-    bottom:0;
-    width:2px;
-    margin-left:-1px;
-    background: linear-gradient(to bottom, transparent 0%, var(--amber) 42%, var(--amber) 58%, transparent 100%);
-    box-shadow: 0 0 18px var(--amber), 0 0 48px var(--amber-dim);
-    opacity:0;
-    transform: scaleY(0);
-    transform-origin:center;
-  }
-
-  .flash{
-    inset:0;
-    background: radial-gradient(circle at 50% 42%, rgba(160, 200, 255, 0.22) 0%, transparent 52%);
-    opacity:0;
-  }
-
-  .stage{
-    position:relative;
-    z-index:1;
-    min-height:100dvh;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    justify-content:center;
-    padding: 8vh 6vw 10vh;
-    text-align:center;
-  }
-
-  .orbit-rings{
-    position:absolute;
-    left:50%;
-    top:48%;
-    width: min(92vw, 820px);
-    aspect-ratio: 1;
-    transform: translate(-50%, -50%);
-    pointer-events:none;
-    z-index:0;
-    perspective: 760px;
-    opacity:0;
-  }
-  .ring{
-    position:absolute;
-    left:50%;
-    top:50%;
-    border: 1px solid rgba(158,200,240,0.22);
-    border-radius:50%;
-    box-shadow: 0 0 18px rgba(120,170,230,0.08), inset 0 0 16px rgba(120,170,230,0.04);
-  }
-  .ring-a{
-    width:100%; height:100%;
-    margin: -50% 0 0 -50%;
-  }
-  .ring-b{
-    width:70%; height:70%;
-    margin: -35% 0 0 -35%;
-    opacity:.7;
-  }
-  .ring-c{
-    width:130%; height:130%;
-    margin: -65% 0 0 -65%;
-    opacity:.35;
-  }
-
-  .eyebrow{
-    position:relative;
-    z-index:1;
-    font-size: clamp(13px, 1.6vw, 16px);
-    letter-spacing: 0.14em;
-    color: var(--muted);
-    margin: 0 0 clamp(24px, 5vh, 44px);
-    font-weight:500;
-  }
-
-  .board-wrap{
-    --mx: 0;
-    --my: 0;
-    --axis-glow: 0;
-    position:relative;
-    z-index:1;
-    display:flex;
-    flex-direction:column;
-    align-items:center;
-    perspective: 900px;
-  }
-
-  .board{
-    display:flex;
-    align-items:baseline;
-    transform-style: preserve-3d;
-    transform: rotateY(calc(var(--mx) * 18deg)) rotateX(calc(var(--my) * -14deg));
-    transition: transform .25s cubic-bezier(.2,.7,.3,1);
-    will-change: transform;
-  }
-
-  .digits{
-    position:relative;
-    display:flex;
-    align-items:flex-end;
-  }
-
-  .slot{
-    position:relative;
-    display:inline-flex;
-    align-items:center;
-    justify-content:center;
-    width: calc(var(--digit-fs) * 0.72);
-    height: calc(var(--digit-fs) * 1.05);
-  }
-
-  .char{
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size: var(--digit-fs);
-    line-height:1;
-    color: var(--ivory);
-    letter-spacing: 0.02em;
-    display:inline-block;
-    user-select:none;
-  }
-
-  .glyph{
-    opacity:0;
-  }
-
-  .eye{
-    display:inline-block;
-    position:relative;
-    width: calc(var(--digit-fs) * 0.56);
-    height: calc(var(--digit-fs) * 0.8);
-    border: calc(var(--digit-fs) * 0.09) solid var(--ivory);
-    border-radius: 50%;
-    box-sizing: border-box;
-    transform-origin: center;
-    transition: border-color .25s ease, box-shadow .25s ease;
-  }
-
-  .eye .pupil{
-    position:absolute;
-    width: calc(var(--digit-fs) * 0.15);
-    height: calc(var(--digit-fs) * 0.15);
-    border-radius:50%;
-    background: var(--amber);
-    top:50%; left:50%;
-    transform: translate(calc(-50% + var(--mx, 0) * 5px), calc(-50% + var(--my, 0) * 4px));
-    transition: transform .2s cubic-bezier(.2,.7,.3,1);
-    box-shadow: 0 0 8px var(--amber-dim);
-  }
-
-  .eye.closed{
-    transform: scaleY(0.06);
-  }
-
-  .suffix{
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size: calc(var(--digit-fs) * 0.4);
-    color: var(--amber);
-    margin-left: 6px;
-    align-self:flex-end;
-    padding-bottom: 0.14em;
-    user-select:none;
-    opacity:0;
-  }
-
-  .mirror-axis{
-    position:absolute;
-    top: 6%;
-    bottom: 6%;
-    left: 50%;
-    width: 2px;
-    background: var(--amber);
-    transform: translateX(-50%) scaleY(0);
-    transform-origin:center;
-    opacity: 0;
-    border-radius:2px;
-    pointer-events:none;
-  }
-
-  .shock{
-    position:absolute;
-    left:50%;
-    top:48%;
-    width: 24px;
-    height: 24px;
-    border: 1.5px solid var(--amber);
-    border-radius:50%;
-    transform: translate(-50%, -50%) scale(0.2);
-    opacity:0;
-    pointer-events:none;
-  }
-
-  .reader{
-    position:absolute;
-    top:-12%;
-    bottom:-12%;
-    width: 30%;
-    left:-35%;
-    background: linear-gradient(90deg, transparent, rgba(158,200,240,0.0) 20%, rgba(210,230,255,0.45) 50%, rgba(158,200,240,0.0) 80%, transparent);
-    mix-blend-mode: screen;
-    pointer-events:none;
-    opacity:0;
-  }
-
-  .reflection{
-    margin-top: 8px;
-    transform: scaleY(-1) rotateY(calc(var(--mx) * 18deg)) rotateX(calc(var(--my) * 14deg));
-    transition: transform .25s cubic-bezier(.2,.7,.3,1);
-    opacity: 0;
-    -webkit-mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 65%);
-    mask-image: linear-gradient(to bottom, rgba(0,0,0,0.6), transparent 65%);
-    pointer-events:none;
-    filter: blur(0.3px);
-    will-change: transform;
-  }
-
-  .cta{
-    position:relative;
-    z-index:1;
-    margin-top: clamp(36px, 6vh, 60px);
-    display:inline-flex;
-    align-items:center;
-    gap:10px;
-    font-family:'Space Mono', monospace;
-    font-weight:700;
-    font-size: clamp(18px, 2.8vw, 26px);
-    color: var(--amber);
-    text-decoration:none;
-    padding: 12px 22px;
-    border: 1px solid var(--amber);
-    border-radius: 999px;
-    background: rgba(158,200,240,0.06);
-    opacity:0;
-    transition: background .25s ease, transform .25s ease;
-  }
-  .cta .arrow{ transition: transform .25s ease; }
-  .cta:hover{
-    background: rgba(158,200,240,0.14);
-    transform: translateY(-2px);
-  }
-  .cta:hover .arrow{ transform: translateX(4px); }
-  .cta:focus-visible{
-    outline: 2px solid var(--amber);
-    outline-offset: 4px;
-  }
-
-  .footer{
-    position:fixed;
-    left:0; right:0; bottom: 20px;
-    z-index:2;
-    text-align:center;
-    font-size: 12px;
-    letter-spacing: 0.08em;
-    color: rgba(176,196,220,0.32);
-  }
-  .footer a{
-    color: inherit;
-    text-decoration:none;
-    border-bottom: 1px solid transparent;
-    padding-bottom: 1px;
-    transition: color .2s ease, border-color .2s ease;
-  }
-  .footer a:hover{
-    color: var(--amber);
-    border-color: var(--amber-dim);
-  }
-
-  body.ready .board-wrap{ --axis-glow: 1; }
-  body.ready .char{ text-shadow: 0 0 16px var(--amber-dim); }
-  body.ready .eye{
-    animation: none;
-    opacity: 1;
-    transform: none;
-    border-color: var(--amber);
-    box-shadow: 0 0 16px var(--amber-dim);
-  }
-  body.ready .eye.closed,
-  body.shot-eyes-done .eye.closed{
-    transform: scaleY(0.06);
-  }
-  body.shot-eyes-done .eye{
-    animation: none;
-    opacity: 1;
-    transform: none;
-  }
-
-  @media (max-width: 640px){
-    :root{ --digit-fs: 52px; }
-  }
-  @media (max-width: 380px){
-    :root{ --digit-fs: 42px; }
-  }
-
-  /* 5-second cinematic storyboard
-     0.00–0.90  Shot 1  title card
-     0.90–1.70  Shot 2  the cut
-     1.70–2.70  Shot 3  the twins (1 … 1)
-     2.70–3.70  Shot 4  eyes open
-     3.70–4.50  Shot 5  the 2s collide
-     4.50–5.00  Shot 6  .com locks, CTA */
-  @media (prefers-reduced-motion: no-preference){
-    .cosmos{
-      animation: nebulaDrift 32s ease-in-out infinite alternate;
-    }
-    .orbit-rings{
-      animation: fadeRings 1.6s ease 1.05s both;
-    }
-    .ring-a{ animation: orbitSpin 52s linear 1.05s infinite; }
-    .ring-b{ animation: orbitSpinRev 38s linear 1.05s infinite; }
-    .ring-c{ animation: orbitSpin 70s linear 1.05s infinite; }
-    .eyebrow{
-      animation: fadeUp 1.1s ease-out .22s both;
-    }
-    .board-wrap{
-      animation: cameraPull 5s cubic-bezier(.25,.08,.25,1) both;
-    }
-    .beam{
-      animation: beamDrop 1.15s ease-in-out .9s both;
-    }
-    .mirror-axis{
-      animation: axisCut .95s ease-out .95s both,
-                 axisPulse 4.5s ease-in-out 2s infinite;
-    }
-    .slot[data-i="0"] .char{
-      animation: flyInL 1.05s cubic-bezier(.4,0,.2,1) 1.7s both;
-    }
-    .slot[data-i="5"] .char{
-      animation: flyInR 1.05s cubic-bezier(.4,0,.2,1) 1.7s both;
-    }
-    .slot[data-i="1"] .eye,
-    .slot[data-i="4"] .eye{
-      animation: eyeWake 1s cubic-bezier(.4,0,.2,1) 2.7s both;
-    }
-    .slot[data-i="1"] .char,
-    .slot[data-i="4"] .char{
-      animation: flyInSoft .95s cubic-bezier(.4,0,.2,1) 2.7s both;
-    }
-    .slot[data-i="2"] .char{
-      animation: slamInL .95s cubic-bezier(.4,0,.2,1) 3.7s both;
-    }
-    .slot[data-i="3"] .char{
-      animation: slamInR .95s cubic-bezier(.4,0,.2,1) 3.7s both;
-    }
-    .shock{
-      animation: shockwave 1.15s ease-out 4.35s both;
-    }
-    .flash{
-      animation: flashBang 1.05s ease-out 4.35s both;
-    }
-    .suffix{
-      animation: popCom .85s cubic-bezier(.4,0,.2,1) 4.5s both;
-    }
-    .digits{
-      animation: lockGlow 1.35s ease-out 4.5s both;
-    }
-    .reflection{
-      animation: reflectionIn 1s ease-out 4.55s both;
-    }
-    .cta{
-      animation: ctaIn .8s ease-out 5s both;
-    }
-    .reader{
-      animation: readAcross 1.8s ease-in-out 5.15s both;
-    }
-  }
-
-  @media (prefers-reduced-motion: reduce){
-    .glyph, .suffix, .cta, .eyebrow, .reflection, .mirror-axis{
-      opacity:1 !important;
-      transform:none !important;
-      filter:none !important;
-      animation:none !important;
-    }
-    .mirror-axis{
-      opacity:.4 !important;
-      transform: translateX(-50%) !important;
-    }
-    .beam, .flash, .shock, .reader{ display:none; }
-    .orbit-rings{ opacity:.45; }
-    .ring-a, .ring-b, .ring-c{ transform: rotateX(64deg); }
-  }
-
-  @keyframes beamDrop{
-    0%{ opacity:0; transform: scaleY(0); }
-    22%{ opacity:1; transform: scaleY(1); }
-    70%{ opacity:.55; transform: scaleY(1); }
-    100%{ opacity:0; transform: scaleY(1); }
-  }
-
-  @keyframes flashBang{
-    0%{ opacity:0; }
-    22%{ opacity:.85; }
-    100%{ opacity:0; }
-  }
-
-  @keyframes cameraPull{
-    0%{ transform: scale(1.18); }
-    100%{ transform: none; }
-  }
-
-  @keyframes flyInL{
-    0%{
-      opacity:0;
-      transform: translateX(-160px) scale(.4);
-      filter: blur(12px);
-      color: var(--amber);
-      text-shadow: 0 0 28px var(--amber);
-    }
-    78%{
-      opacity:1;
-      transform: translateX(4px) scale(1.04);
-      filter: blur(0);
-      color: var(--amber);
-      text-shadow: 0 0 16px var(--amber-dim);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      filter: none;
-      color: var(--ivory);
-      text-shadow: none;
-    }
-  }
-
-  @keyframes flyInR{
-    0%{
-      opacity:0;
-      transform: translateX(160px) scale(.4);
-      filter: blur(12px);
-      color: var(--amber);
-      text-shadow: 0 0 28px var(--amber);
-    }
-    78%{
-      opacity:1;
-      transform: translateX(-4px) scale(1.04);
-      filter: blur(0);
-      color: var(--amber);
-      text-shadow: 0 0 16px var(--amber-dim);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      filter: none;
-      color: var(--ivory);
-      text-shadow: none;
-    }
-  }
-
-  @keyframes flyInSoft{
-    0%{
-      opacity:0;
-      transform: scale(.4);
-      filter: blur(8px);
-      color: var(--amber);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      filter: none;
-      color: var(--ivory);
-    }
-  }
-
-  @keyframes eyeWake{
-    0%{
-      opacity:0;
-      transform: scaleY(0.06) scaleX(.45);
-      filter: blur(8px);
-      border-color: var(--amber);
-      box-shadow: 0 0 0 var(--amber);
-    }
-    28%{
-      opacity:1;
-      transform: scaleY(0.06) scaleX(1);
-      filter: blur(0);
-      border-color: var(--amber);
-    }
-    68%{
-      transform: scaleY(1.08) scaleX(1);
-      border-color: var(--amber);
-      box-shadow: 0 0 22px var(--amber);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      border-color: var(--ivory);
-      box-shadow: none;
-      filter: none;
-    }
-  }
-
-  @keyframes slamInL{
-    0%{
-      opacity:0;
-      transform: translateX(-110px) scale(.35);
-      filter: blur(12px);
-      color: var(--amber);
-      text-shadow: 0 0 30px var(--amber);
-    }
-    72%{
-      opacity:1;
-      transform: translateX(8px) scale(1.08);
-      filter: blur(0);
-      color: var(--amber);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      color: var(--ivory);
-      text-shadow: none;
-    }
-  }
-
-  @keyframes slamInR{
-    0%{
-      opacity:0;
-      transform: translateX(110px) scale(.35);
-      filter: blur(12px);
-      color: var(--amber);
-      text-shadow: 0 0 30px var(--amber);
-    }
-    72%{
-      opacity:1;
-      transform: translateX(-8px) scale(1.08);
-      filter: blur(0);
-      color: var(--amber);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      color: var(--ivory);
-      text-shadow: none;
-    }
-  }
-
-  @keyframes popCom{
-    0%{
-      opacity:0;
-      transform: scale(.15) translate(-16px, 10px);
-      filter: blur(8px);
-    }
-    58%{
-      opacity:1;
-      transform: scale(1.16);
-      filter: blur(0);
-      text-shadow: 0 0 20px var(--amber);
-    }
-    100%{
-      opacity:1;
-      transform: none;
-      text-shadow: none;
-    }
-  }
-
-  @keyframes axisCut{
-    0%{ opacity:0; transform: translateX(-50%) scaleY(0); box-shadow: none; }
-    40%{ opacity:1; transform: translateX(-50%) scaleY(1.35); box-shadow: 0 0 36px var(--amber); }
-    100%{ opacity:.38; transform: translateX(-50%) scaleY(1); box-shadow: none; }
-  }
-
-  @keyframes axisPulse{
-    0%, 100%{
-      opacity: calc(.3 + var(--axis-glow, 0) * .55);
-      box-shadow: 0 0 calc(6px + var(--axis-glow, 0) * 30px) var(--amber);
-    }
-    50%{
-      opacity: calc(.4 + var(--axis-glow, 0) * .55);
-      box-shadow: 0 0 calc(10px + var(--axis-glow, 0) * 34px) var(--amber);
-    }
-  }
-
-  @keyframes shockwave{
-    0%{ opacity:.75; transform: translate(-50%, -50%) scale(.15); }
-    100%{ opacity:0; transform: translate(-50%, -50%) scale(16); }
-  }
-
-  @keyframes reflectionIn{
-    from{ opacity:0; }
-    to{ opacity:0.22; }
-  }
-
-  @keyframes lockGlow{
-    0%{ filter: brightness(1); }
-    40%{ filter: brightness(1.4); }
-    100%{ filter: brightness(1); }
-  }
-
-  @keyframes readAcross{
-    0%{ left:-35%; opacity:0; }
-    14%{ opacity:.95; }
-    100%{ left:108%; opacity:0; }
-  }
-
-  @keyframes fadeUp{
-    from{ opacity:0; transform: translateY(10px); }
-    to{ opacity:1; transform: translateY(0); }
-  }
-
-  @keyframes fadeRings{
-    from{ opacity:0; }
-    to{ opacity:1; }
-  }
-
-  @keyframes nebulaDrift{
-    from{ transform: translate(-2%, -1%) scale(1); }
-    to{ transform: translate(3%, 2%) scale(1.08); }
-  }
-
-  @keyframes orbitSpin{
-    from{ transform: rotateX(64deg) rotateZ(0deg); }
-    to{ transform: rotateX(64deg) rotateZ(360deg); }
-  }
-
-  @keyframes orbitSpinRev{
-    from{ transform: rotateX(66deg) rotateZ(0deg); }
-    to{ transform: rotateX(66deg) rotateZ(-360deg); }
-  }
-
-  @keyframes ctaIn{
-    from{ opacity:0; }
-    to{ opacity:1; }
-  }
-</style>
+<link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="style.css">
 </head>
 <body>
 
-  <div class="cosmos" aria-hidden="true"></div>
-  <canvas id="particles" aria-hidden="true"></canvas>
-  <div class="beam" aria-hidden="true"></div>
-  <div class="flash" aria-hidden="true"></div>
-  <div class="vignette" aria-hidden="true"></div>
+<canvas id="bg" aria-hidden="true"></canvas>
 
-  <div class="stage">
-    <div class="orbit-rings" aria-hidden="true">
-      <span class="ring ring-a"></span>
-      <span class="ring ring-b"></span>
-      <span class="ring ring-c"></span>
-    </div>
-    <p class="eyebrow">有些域名，正着念、倒着念，都是它</p>
+<div id="viewport">
+  <div id="stage-wrap">
+    <div id="stage">
 
-    <div class="board-wrap">
-      <div class="board">
-        <div class="digits">
-          <span class="slot" data-i="0"><span class="char glyph">1</span></span>
-          <span class="slot" data-i="1"><span class="eye glyph" aria-hidden="true"><span class="pupil"></span></span></span>
-          <span class="slot" data-i="2"><span class="char glyph">2</span></span>
-          <span class="slot" data-i="3"><span class="char glyph">2</span></span>
-          <span class="slot" data-i="4"><span class="eye glyph" aria-hidden="true"><span class="pupil"></span></span></span>
-          <span class="slot" data-i="5"><span class="char glyph">1</span></span>
-          <div class="mirror-axis" aria-hidden="true"></div>
-          <div class="shock" aria-hidden="true"></div>
-          <div class="reader" aria-hidden="true"></div>
+      <header class="topbar">
+        <div class="brand" id="brand">102<span class="x-mark">✕</span>201</div>
+        <div class="top-right">
+          <div class="rank-chip" id="rankChip" title="当前段位"><span>🥉</span><span>青铜军师</span></div>
+          <button class="icon-btn" id="soundBtn" title="音效开关" aria-label="音效开关">🔊</button>
+          <button class="icon-btn" id="ruleBtn" title="玩法规则" aria-label="玩法规则">📖</button>
         </div>
-        <span class="suffix">.com</span>
-      </div>
-      <div class="board reflection" aria-hidden="true">
-        <div class="digits">
-          <span class="slot" data-i="0"><span class="char glyph">1</span></span>
-          <span class="slot" data-i="1"><span class="char glyph">0</span></span>
-          <span class="slot" data-i="2"><span class="char glyph">2</span></span>
-          <span class="slot" data-i="3"><span class="char glyph">2</span></span>
-          <span class="slot" data-i="4"><span class="char glyph">0</span></span>
-          <span class="slot" data-i="5"><span class="char glyph">1</span></span>
+      </header>
+
+      <section id="hero">
+        <div class="hero-row">
+          <div class="x-emblem" aria-hidden="true"><span>X</span></div>
+          <div class="bubble" id="heroTalk" aria-live="polite">我是裁判X，规则我来定！</div>
         </div>
-        <span class="suffix">.com</span>
-      </div>
+        <h1 class="title">
+          <span class="t-102">102</span>
+          <span class="t-vs">VS</span>
+          <span class="t-201">201</span>
+        </h1>
+        <p class="subtitle">田忌赛马 · 三场对阵 · 以弱胜强</p>
+      </section>
+
+      <section class="screen" id="screen">
+
+        <!-- A · 主页 -->
+        <div class="layer active" id="layer-home">
+          <div class="stats-grid" id="homeStats"></div>
+          <div class="recent" id="recentRow"></div>
+          <div class="home-btns">
+            <button class="btn btn-primary big" id="btnPlay">🏇 开始对决</button>
+            <button class="btn btn-daily" id="btnDaily">📅 每日挑战</button>
+            <button class="btn btn-dual" id="btnDual">👥 双人对战</button>
+            <div class="btn-row2">
+              <button class="btn ghost" id="btnAch">🏆 成就</button>
+              <button class="btn ghost" id="btnRule2">❓ 玩法</button>
+            </div>
+          </div>
+          <div class="home-empty" id="homeEmpty">🏟️ X正等待挑战者入场……</div>
+        </div>
+
+        <!-- B · 选阵营 -->
+        <div class="layer" id="layer-camp">
+          <div class="screen-head">
+            <h2>选择你的阵营</h2>
+          </div>
+          <div class="camp-grid">
+            <div class="camp-card camp-102" data-camp="102">
+              <div class="camp-emoji">🔵</div>
+              <div class="camp-name">102营</div>
+              <div class="camp-slogan">正着念，蓝方必胜</div>
+              <button class="btn camp-btn" type="button">加入102营</button>
+            </div>
+            <div class="camp-card camp-201" data-camp="201">
+              <div class="camp-emoji">🟠</div>
+              <div class="camp-name">201营</div>
+              <div class="camp-slogan">倒着念，橙方无敌</div>
+              <button class="btn camp-btn" type="button">加入201营</button>
+            </div>
+          </div>
+          <button class="btn ghost small back-home" data-back="home" type="button">← 回主页</button>
+        </div>
+
+        <!-- C · 布阵 -->
+        <div class="layer" id="layer-lineup">
+          <div id="lineupPanel">
+            <div class="screen-head">
+              <h2 id="lineupTitle">排兵布阵</h2>
+              <div class="x-mini"><span class="bubble mini" id="xHint"></span></div>
+            </div>
+            <div class="lineup-wrap">
+              <div class="lanes" id="lanes"></div>
+              <div class="pool-wrap">
+                <div class="pool-label">我的马匹 <small>（点击 → 放入赛道）</small></div>
+                <div class="pool" id="pool"></div>
+              </div>
+              <div class="preset-row">
+                <button class="btn ghost small" id="btnRandom" type="button">🎲 随机</button>
+                <button class="btn ghost small" id="btnTianji" type="button">🧠 田忌妙计</button>
+                <button class="btn ghost small" id="btnClear" type="button">🧹 清空</button>
+              </div>
+              <div class="lineup-actions">
+                <button class="btn ghost" id="btnBackHome" type="button">← 回主页</button>
+                <button class="btn btn-primary big" id="btnStart" type="button" disabled>开赛！</button>
+              </div>
+            </div>
+          </div>
+          <div id="passPanel" class="pass-panel" hidden>
+            <div class="pass-icon">📱</div>
+            <h2>把设备交给 201营</h2>
+            <p>102营已秘密布阵。请确认对方看不到阵型，再交给下一位选手。</p>
+            <button class="btn btn-primary big" id="btnPassOk" type="button">我是201营，开始布阵</button>
+            <button class="btn ghost small" id="btnPassCancel" type="button">← 取消对决</button>
+          </div>
+        </div>
+
+        <!-- D · 对局 -->
+        <div class="layer" id="layer-match">
+          <div class="match-inner">
+            <div class="arena-head">
+              <div class="scoreboard">
+                <div class="side side-my">
+                  <span class="side-name" id="myCampName">102营</span>
+                  <span class="side-score" id="myScore">0</span>
+                </div>
+                <div class="score-vs">—</div>
+                <div class="side side-opp">
+                  <span class="side-score" id="oppScore">0</span>
+                  <span class="side-name" id="oppCampName">201营</span>
+                </div>
+              </div>
+              <div class="round-dots" id="roundDots"></div>
+              <button class="btn ghost small" id="btnFast" type="button">⏩ 快进</button>
+            </div>
+
+            <div class="x-ref">
+              <div class="x-emblem sm" aria-hidden="true"><span>X</span></div>
+              <div class="bubble" id="xTalk" aria-live="polite">欢迎来到102 vs 201的赛场，我是裁判X。</div>
+            </div>
+
+            <div class="track-stage">
+              <div class="track">
+                <div class="lane lane-my" id="laneMy">
+                  <span class="lane-tag" id="laneMyTag">102营 · 第1场</span>
+                  <div class="horse" id="horseMy"><span class="h-emoji">🐴</span><span class="h-name">小蓝</span><span class="h-speed">速1</span></div>
+                  <div class="finish-line"><span>终点</span></div>
+                </div>
+                <div class="lane lane-opp" id="laneOpp">
+                  <span class="lane-tag" id="laneOppTag">201营 · 第1场</span>
+                  <div class="horse" id="horseOpp"><span class="h-emoji">🐴</span><span class="h-name">小红</span><span class="h-speed">速1</span></div>
+                  <div class="finish-line"><span>终点</span></div>
+                </div>
+              </div>
+              <div class="round-banner" id="roundBanner"></div>
+              <div class="coin-overlay" id="coinOverlay">
+                <div class="coin" id="coin">🪙</div>
+                <div class="coin-text" id="coinText"></div>
+              </div>
+            </div>
+
+            <div class="mu-wrap">
+              <div class="mu-title">⚔️ 三场对阵 <small>上等马 &gt; 中等马 &gt; 下等马 · 三局两胜</small></div>
+              <div class="matchup-table" id="matchupTable"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- E · 结算 -->
+        <div class="layer" id="layer-result">
+          <div class="result-box" id="resultBox">
+            <div class="result-badge" id="resultBadge">🏆</div>
+            <h2 class="result-title" id="resultTitle">胜利！</h2>
+            <div class="result-score" id="resultScore">2 : 1</div>
+            <div class="x-verdict" id="xVerdict"></div>
+            <div class="pts-line" id="ptsLine"></div>
+            <div class="streak-line" id="streakLine"></div>
+            <div class="rank-line" id="rankLine"></div>
+            <div class="formations" id="formations"></div>
+          </div>
+          <div class="result-btns" id="resultBtns">
+            <button class="btn btn-primary big" id="btnAgain" type="button">⚔️ 再来一局</button>
+            <button class="btn ghost" id="btnSwitchCamp" type="button">🔁 换阵营</button>
+            <button class="btn ghost" id="btnHome" type="button">🏠 回主页</button>
+          </div>
+        </div>
+
+      </section>
+
+      <canvas id="fx" aria-hidden="true"></canvas>
+      <div id="toast-wrap" aria-live="polite"></div>
+
     </div>
-
-    <a class="cta" href="https://www.102201.com" target="_blank" rel="noopener">
-      进入 www.102201.com <span class="arrow">→</span>
-    </a>
   </div>
+</div>
 
-  <div class="footer">
-    <a href="https://www.102201.com" target="_blank" rel="noopener">www.102201.com</a>
+<!-- 全局弹窗：fixed，不参与舞台文档流 -->
+<div class="modal-mask" id="modalAch">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="achTitle">
+    <div class="modal-head">
+      <h3 id="achTitle">🏆 成就殿堂</h3>
+      <button class="icon-btn" data-close="modalAch" aria-label="关闭">✕</button>
+    </div>
+    <div class="ach-grid" id="achGrid"></div>
   </div>
+</div>
 
-<script>
-(function(){
-  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-  var wrap = document.querySelector('.board-wrap');
-  var eyes = Array.prototype.slice.call(document.querySelectorAll('.eye'));
-  var ready = reduceMotion;
-  var pointer = { x: 0, y: 0 };
+<div class="modal-mask" id="modalRule">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="ruleTitle">
+    <div class="modal-head">
+      <h3 id="ruleTitle">❓ 玩法规则</h3>
+      <button class="icon-btn" data-close="modalRule" aria-label="关闭">✕</button>
+    </div>
+    <div class="rule-body">
+      <p><b>故事原型：</b>战国时田忌赛马，孙膑献计——「下等马对王上等马，上等马对王中等马，中等马对王下等马」，三局两胜，以下驷换一败，反败为胜。</p>
+      <p><b>玩法：</b>你是军师，为阵营排兵布阵。三匹马按顺序出战：🦄上等马(速3)、🐎中等马(速2)、🐴下等马(速1)。速度高者赢下该回合，同速则由裁判X掷硬币。</p>
+      <p><b>胜负：</b>三场对阵，先赢两场者胜。</p>
+      <p><b>秘诀：</b>对手阵型未知时，尝试「田忌妙计」布阵；若连用同一阵型，聪明的X会记住并反制你！</p>
+      <p><b>每日挑战：</b>每天X都会定一条特殊规则，完成可得额外奖励。</p>
+      <p><b>双人对战：</b>同一设备热座——102营先秘密布阵，把设备交给201营再布阵，同时揭晓开赛。友谊赛不计声望。</p>
+    </div>
+  </div>
+</div>
 
-  function trackPointer(x, y){
-    pointer.x = (x / window.innerWidth - 0.5) * 2;
-    pointer.y = (y / window.innerHeight - 0.5) * 2;
-  }
+<div class="modal-mask" id="modalDaily">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="dailyTitle">
+    <div class="modal-head">
+      <h3 id="dailyTitle">📅 每日挑战</h3>
+      <button class="icon-btn" data-close="modalDaily" aria-label="关闭">✕</button>
+    </div>
+    <div class="daily-body" id="dailyBody"></div>
+    <button class="btn btn-primary big" id="btnDailyStart" type="button" style="display:none">接受挑战 →</button>
+  </div>
+</div>
 
-  window.addEventListener('mousemove', function(e){
-    trackPointer(e.clientX, e.clientY);
-  }, { passive: true });
-  window.addEventListener('touchmove', function(e){
-    if (!e.touches[0]) return;
-    trackPointer(e.touches[0].clientX, e.touches[0].clientY);
-  }, { passive: true });
-
-  if (reduceMotion){
-    document.body.classList.add('ready');
-  } else {
-    setTimeout(function(){ document.body.classList.add('ready'); ready = true; }, 5000);
-  }
-
-  if (!reduceMotion && wrap){
-    function setVars(mx, my, glow){
-      wrap.style.setProperty('--mx', mx.toFixed(3));
-      wrap.style.setProperty('--my', my.toFixed(3));
-      wrap.style.setProperty('--axis-glow', glow.toFixed(3));
-    }
-
-    function fromPoint(x, y){
-      var rect = wrap.getBoundingClientRect();
-      var cx = rect.left + rect.width / 2;
-      var cy = rect.top + rect.height / 2;
-      var mx = Math.max(-1, Math.min(1, (x - cx) / (rect.width / 2 || 1)));
-      var my = Math.max(-1, Math.min(1, (y - cy) / (rect.height / 2 || 1)));
-      var glow = ready ? 1 : Math.max(0, 1 - Math.abs(mx));
-      setVars(mx, my, glow);
-    }
-
-    window.addEventListener('mousemove', function(e){
-      fromPoint(e.clientX, e.clientY);
-    }, { passive: true });
-
-    window.addEventListener('touchmove', function(e){
-      if (!e.touches[0]) return;
-      fromPoint(e.touches[0].clientX, e.touches[0].clientY);
-    }, { passive: true });
-
-    window.addEventListener('mouseleave', function(){
-      setVars(0, 0, ready ? 1 : 0);
-    });
-
-    function blink(){
-      eyes.forEach(function(eye){ eye.classList.add('closed'); });
-      setTimeout(function(){
-        eyes.forEach(function(eye){ eye.classList.remove('closed'); });
-      }, 140);
-    }
-
-    setTimeout(function(){
-      document.body.classList.add('shot-eyes-done');
-      blink();
-    }, 3720);
-
-    setTimeout(function loop(){
-      blink();
-      setTimeout(loop, 2800 + Math.random() * 2200);
-    }, 5600);
-  }
-
-  var canvas = document.getElementById('particles');
-  var ctx = canvas && canvas.getContext ? canvas.getContext('2d') : null;
-  var stars = [];
-  var digits = [];
-  var streaks = [];
-  var bursts = [];
-  var w = 0, h = 0, dpr = 1;
-  var chars = ['0', '1', '2'];
-  var started = performance.now();
-
-  function resize(){
-    if (!ctx) return;
-    dpr = Math.min(window.devicePixelRatio || 1, 2);
-    w = window.innerWidth;
-    h = window.innerHeight;
-    canvas.width = Math.floor(w * dpr);
-    canvas.height = Math.floor(h * dpr);
-    canvas.style.width = w + 'px';
-    canvas.style.height = h + 'px';
-    ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
-  }
-
-  function makeStar(){
-    return {
-      x: Math.random() * w,
-      y: Math.random() * h,
-      z: 0.12 + Math.random() * 0.88,
-      r: 0.55 + Math.random() * 1.7,
-      a: 0.32 + Math.random() * 0.55,
-      phase: Math.random() * Math.PI * 2,
-      tw: 0.5 + Math.random() * 1.8
-    };
-  }
-
-  function makeDigit(){
-    var depth = Math.random();
-    var span = Math.min(w, h);
-    return {
-      char: chars[(Math.random() * 3) | 0],
-      angle: Math.random() * Math.PI * 2,
-      radius: span * (0.16 + depth * 0.52),
-      spin: (0.00016 + Math.random() * 0.0007) * (Math.random() < 0.5 ? 1 : -1),
-      flatten: 0.36 + Math.random() * 0.2,
-      z: 0.18 + depth * 0.82,
-      size: 10 + depth * 24,
-      a: 0.28 + depth * 0.42,
-      glow: Math.random() < 0.2
-    };
-  }
-
-  function makeStreak(){
-    return {
-      ang: Math.random() * Math.PI * 2,
-      len: 50 + Math.random() * 160,
-      dist: 8 + Math.random() * 30,
-      speed: 7 + Math.random() * 16,
-      a: 0.12 + Math.random() * 0.32
-    };
-  }
-
-  function makeBurst(){
-    var ang = Math.random() * Math.PI * 2;
-    var speed = 2.4 + Math.random() * 6.2;
-    return {
-      x: w / 2,
-      y: h * 0.44,
-      vx: Math.cos(ang) * speed,
-      vy: Math.sin(ang) * speed,
-      char: chars[(Math.random() * 3) | 0],
-      size: 12 + Math.random() * 24,
-      a: 0.9,
-      life: 1,
-      decay: 0.01 + Math.random() * 0.018
-    };
-  }
-
-  function burstParticles(){
-    if (!ctx) return;
-    for (var i = 0; i < 72; i++) bursts.push(makeBurst());
-  }
-
-  function tick(now){
-    if (!ctx) return;
-    var elapsed = now - started;
-    var cx = w / 2;
-    var cy = h * 0.44;
-    var intro = elapsed < 4300;
-    ctx.clearRect(0, 0, w, h);
-    ctx.textAlign = 'center';
-    ctx.textBaseline = 'middle';
-
-    var s, sx, sy, tw, i;
-    for (i = 0; i < stars.length; i++){
-      s = stars[i];
-      tw = s.a * (0.62 + 0.38 * (0.5 + 0.5 * Math.sin(now * 0.001 * s.tw + s.phase)));
-      sx = s.x + pointer.x * 14 * s.z;
-      sy = s.y + pointer.y * 9 * s.z;
-      ctx.globalAlpha = tw;
-      ctx.fillStyle = s.z > 0.72 ? '#eaf0f8' : '#9ec8f0';
-      ctx.beginPath();
-      ctx.arc(sx, sy, Math.max(0.4, s.r * (0.45 + s.z * 0.7)), 0, Math.PI * 2);
-      ctx.fill();
-    }
-
-    var pts = [];
-    var d, dx, dy, px, py;
-    for (i = 0; i < digits.length; i++){
-      d = digits[i];
-      d.angle += d.spin * (intro ? 1.25 : 0.82);
-      if (intro) d.radius += (d.radius * 0.94 - d.radius) * 0.0012;
-      px = cx + Math.cos(d.angle) * d.radius + pointer.x * 26 * d.z;
-      py = cy + Math.sin(d.angle) * d.radius * d.flatten + pointer.y * 16 * d.z;
-      pts.push({ x: px, y: py, z: d.z });
-      ctx.globalAlpha = d.a * (0.85 + 0.15 * Math.sin(now * 0.0009 + d.angle));
-      ctx.fillStyle = d.glow ? '#eaf0f8' : '#9ec8f0';
-      if (d.glow){
-        ctx.shadowColor = 'rgba(160,200,255,0.55)';
-        ctx.shadowBlur = 14;
-      }
-      ctx.font = '700 ' + d.size + 'px "Space Mono", monospace';
-      ctx.fillText(d.char, px, py);
-      if (d.glow) ctx.shadowBlur = 0;
-    }
-
-    ctx.lineWidth = 0.7;
-    ctx.strokeStyle = 'rgba(160,200,240,1)';
-    var cap = Math.min(pts.length, 40);
-    var j, dist;
-    for (i = 0; i < cap; i++){
-      for (j = i + 1; j < cap; j++){
-        dx = pts[i].x - pts[j].x;
-        dy = pts[i].y - pts[j].y;
-        dist = dx * dx + dy * dy;
-        if (dist < 7200 && dist > 400){
-          ctx.globalAlpha = 0.14 * (pts[i].z + pts[j].z);
-          ctx.beginPath();
-          ctx.moveTo(pts[i].x, pts[i].y);
-          ctx.lineTo(pts[j].x, pts[j].y);
-          ctx.stroke();
-        }
-      }
-    }
-
-    if (elapsed > 880 && elapsed < 1950){
-      var fade = elapsed < 1100 ? (elapsed - 880) / 220 : elapsed > 1700 ? (1950 - elapsed) / 250 : 1;
-      ctx.strokeStyle = 'rgba(180,215,255,0.7)';
-      ctx.lineWidth = 1;
-      for (i = 0; i < streaks.length; i++){
-        var st = streaks[i];
-        st.dist += st.speed;
-        var x1 = cx + Math.cos(st.ang) * st.dist;
-        var y1 = cy + Math.sin(st.ang) * st.dist * 0.55;
-        var x2 = cx + Math.cos(st.ang) * (st.dist + st.len);
-        var y2 = cy + Math.sin(st.ang) * (st.dist + st.len) * 0.55;
-        ctx.globalAlpha = st.a * fade;
-        ctx.beginPath();
-        ctx.moveTo(x1, y1);
-        ctx.lineTo(x2, y2);
-        ctx.stroke();
-      }
-    }
-
-    for (i = bursts.length - 1; i >= 0; i--){
-      var b = bursts[i];
-      b.x += b.vx;
-      b.y += b.vy;
-      b.life -= b.decay;
-      b.a *= 0.984;
-      if (b.life <= 0 || b.a < 0.02){
-        bursts.splice(i, 1);
-        continue;
-      }
-      ctx.globalAlpha = b.a;
-      ctx.fillStyle = '#d0e4ff';
-      ctx.font = '700 ' + b.size + 'px "Space Mono", monospace';
-      ctx.fillText(b.char, b.x, b.y);
-    }
-
-    ctx.globalAlpha = 1;
-    ctx.shadowBlur = 0;
-    requestAnimationFrame(tick);
-  }
-
-  if (ctx && !reduceMotion){
-    resize();
-    window.addEventListener('resize', resize);
-    var starCount = w < 640 ? 70 : 150;
-    var digitCount = w < 640 ? 32 : 64;
-    var n;
-    for (n = 0; n < starCount; n++) stars.push(makeStar());
-    for (n = 0; n < digitCount; n++) digits.push(makeDigit());
-    for (n = 0; n < 42; n++) streaks.push(makeStreak());
-    setTimeout(burstParticles, 4380);
-    requestAnimationFrame(tick);
-  }
-})();
-</script>
-
+<script src="game.js"></script>
 </body>
 </html>
