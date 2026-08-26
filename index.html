@@ -3,8 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-<title>田忌赛马 · 102 vs 201 · 裁判X</title>
-<meta name="description" content="102营 vs 201营，田忌赛马策略对决。三场对阵，以弱胜强，裁判X全程裁决。">
+<title>102 vs 201 · 数字对决</title>
+<meta name="description" content="数字大陆只有 0、1、2。选阵营，升级合成图腾，3分钟一局卡牌对决。把访客变成玩家。">
+<meta property="og:title" content="102 vs 201 · 数字对决">
+<meta property="og:description" content="数字大陆只有 0、1、2。选阵营，升级合成图腾 102 / 201，3分钟一局回合制卡牌对决。">
+<meta property="og:type" content="website">
+<meta name="twitter:card" content="summary">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%230b1026'/%3E%3Ctext x='32' y='44' font-size='38' font-weight='bold' text-anchor='middle' fill='%23e879f9'%3EX%3C/text%3E%3C/svg%3E">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -28,27 +32,26 @@
         </div>
       </header>
 
-      <section id="hero">
-        <div class="hero-row">
-          <div class="x-emblem" aria-hidden="true"><span>X</span></div>
-          <div class="bubble" id="heroTalk" aria-live="polite">我是裁判X，规则我来定！</div>
-        </div>
-        <h1 class="title">
-          <span class="t-102">102</span>
-          <span class="t-vs">VS</span>
-          <span class="t-201">201</span>
-        </h1>
-        <p class="subtitle">田忌赛马 · 三场对阵 · 以弱胜强</p>
-      </section>
-
       <section class="screen" id="screen">
 
         <!-- A · 主页 -->
         <div class="layer active" id="layer-home">
+          <div class="hero-block">
+            <div class="hero-row">
+              <div class="x-emblem" aria-hidden="true"><span>X</span></div>
+              <div class="bubble" id="heroTalk" aria-live="polite">数字大陆只有 0、1、2——但顺序决定胜负！</div>
+            </div>
+            <h1 class="title">
+              <span class="t-102">102</span>
+              <span class="t-vs">VS</span>
+              <span class="t-201">201</span>
+            </h1>
+            <p class="subtitle">数字对决 · 回合制卡牌 · 3分钟一局</p>
+          </div>
           <div class="stats-grid" id="homeStats"></div>
           <div class="recent" id="recentRow"></div>
           <div class="home-btns">
-            <button class="btn btn-primary big" id="btnPlay">🏇 开始对决</button>
+            <button class="btn btn-primary big" id="btnPlay">⚔️ 开始对决</button>
             <button class="btn btn-daily" id="btnDaily">📅 每日挑战</button>
             <button class="btn btn-dual" id="btnDual">👥 双人对战</button>
             <div class="btn-row2">
@@ -56,7 +59,10 @@
               <button class="btn ghost" id="btnRule2">❓ 玩法</button>
             </div>
           </div>
-          <div class="home-empty" id="homeEmpty">🏟️ X正等待挑战者入场……</div>
+          <div class="marquee-wrap" aria-hidden="true">
+            <div class="marquee" id="homeMarquee"></div>
+            <div class="marquee-caption">X 正等待挑战者入场……</div>
+          </div>
         </div>
 
         <!-- B · 选阵营 -->
@@ -64,92 +70,64 @@
           <div class="screen-head">
             <h2>选择你的阵营</h2>
           </div>
+          <p class="camp-lead">选哪边都行——它们由同样的数字组成！</p>
           <div class="camp-grid">
             <div class="camp-card camp-102" data-camp="102">
-              <div class="camp-emoji">🔵</div>
+              <div class="camp-emoji">102</div>
               <div class="camp-name">102营</div>
-              <div class="camp-slogan">正着念，蓝方必胜</div>
+              <div class="camp-skill">技能：重组 · 弃1抽1</div>
+              <div class="camp-slogan">图腾：102 · 蓝方信仰</div>
               <button class="btn camp-btn" type="button">加入102营</button>
             </div>
             <div class="camp-card camp-201" data-camp="201">
-              <div class="camp-emoji">🟠</div>
+              <div class="camp-emoji">201</div>
               <div class="camp-name">201营</div>
-              <div class="camp-slogan">倒着念，橙方无敌</div>
+              <div class="camp-skill">技能：颠倒 · 下张费用-1</div>
+              <div class="camp-slogan">图腾：201 · 橙方信仰</div>
               <button class="btn camp-btn" type="button">加入201营</button>
             </div>
           </div>
           <button class="btn ghost small back-home" data-back="home" type="button">← 回主页</button>
         </div>
 
-        <!-- C · 布阵 -->
-        <div class="layer" id="layer-lineup">
-          <div id="lineupPanel">
-            <div class="screen-head">
-              <h2 id="lineupTitle">排兵布阵</h2>
-              <div class="x-mini"><span class="bubble mini" id="xHint"></span></div>
-            </div>
-            <div class="lineup-wrap">
-              <div class="lanes" id="lanes"></div>
-              <div class="pool-wrap">
-                <div class="pool-label">我的马匹 <small>（点击 → 放入赛道）</small></div>
-                <div class="pool" id="pool"></div>
-              </div>
-              <div class="preset-row">
-                <button class="btn ghost small" id="btnRandom" type="button">🎲 随机</button>
-                <button class="btn ghost small" id="btnTianji" type="button">🧠 田忌妙计</button>
-                <button class="btn ghost small" id="btnClear" type="button">🧹 清空</button>
-              </div>
-              <div class="lineup-actions">
-                <button class="btn ghost" id="btnBackHome" type="button">← 回主页</button>
-                <button class="btn btn-primary big" id="btnStart" type="button" disabled>开赛！</button>
-              </div>
-            </div>
+        <!-- C · 换牌 -->
+        <div class="layer" id="layer-mulligan">
+          <div class="screen-head">
+            <h2 id="mullTitle">起手换牌</h2>
           </div>
-          <div id="passPanel" class="pass-panel" hidden>
-            <div class="pass-icon">📱</div>
-            <h2>把设备交给 201营</h2>
-            <p>102营已秘密布阵。请确认对方看不到阵型，再交给下一位选手。</p>
-            <button class="btn btn-primary big" id="btnPassOk" type="button">我是201营，开始布阵</button>
-            <button class="btn ghost small" id="btnPassCancel" type="button">← 取消对决</button>
+          <p class="mull-lead" id="mullLead">起手三张，换不换？想想你的曲线！</p>
+          <div class="mull-cards" id="mullCards"></div>
+          <div class="mull-meta">
+            <span id="mullCount">已选换掉：0 张</span>
+          </div>
+          <div class="mull-actions">
+            <button class="btn ghost" id="btnMullBack" type="button">← 回主页</button>
+            <button class="btn btn-primary big" id="btnMullGo" type="button">开战！</button>
           </div>
         </div>
 
         <!-- D · 对局 -->
         <div class="layer" id="layer-match">
-          <div class="match-inner">
-            <div class="arena-head">
-              <div class="scoreboard">
-                <div class="side side-my">
-                  <span class="side-name" id="myCampName">102营</span>
-                  <span class="side-score" id="myScore">0</span>
+          <div class="match-board" id="matchBoard">
+            <div class="zone-opp" id="zoneOpp">
+              <div class="hero-strip opp">
+                <div class="hero-port opp" id="oppHero" data-target="hero" data-side="opp">
+                  <span class="hero-num" id="oppHeroNum">201</span>
+                  <span class="hero-hp" id="oppHp">20</span>
                 </div>
-                <div class="score-vs">—</div>
-                <div class="side side-opp">
-                  <span class="side-score" id="oppScore">0</span>
-                  <span class="side-name" id="oppCampName">201营</span>
+                <div class="hero-meta">
+                  <div class="hero-name" id="oppName">201营</div>
+                  <div class="opp-hands" id="oppHands"></div>
                 </div>
+                <div class="deck-chip" id="oppDeck">牌库 16</div>
               </div>
-              <div class="round-dots" id="roundDots"></div>
-              <button class="btn ghost small" id="btnFast" type="button">⏩ 快进</button>
+              <div class="board-row opp" id="oppBoard"></div>
             </div>
 
-            <div class="x-ref">
-              <div class="x-emblem sm" aria-hidden="true"><span>X</span></div>
-              <div class="bubble" id="xTalk" aria-live="polite">欢迎来到102 vs 201的赛场，我是裁判X。</div>
-            </div>
-
-            <div class="track-stage">
-              <div class="track">
-                <div class="lane lane-my" id="laneMy">
-                  <span class="lane-tag" id="laneMyTag">102营 · 第1场</span>
-                  <div class="horse" id="horseMy"><span class="h-emoji">🐴</span><span class="h-name">小蓝</span><span class="h-speed">速1</span></div>
-                  <div class="finish-line"><span>终点</span></div>
-                </div>
-                <div class="lane lane-opp" id="laneOpp">
-                  <span class="lane-tag" id="laneOppTag">201营 · 第1场</span>
-                  <div class="horse" id="horseOpp"><span class="h-emoji">🐴</span><span class="h-name">小红</span><span class="h-speed">速1</span></div>
-                  <div class="finish-line"><span>终点</span></div>
-                </div>
+            <div class="zone-mid">
+              <div class="x-ref">
+                <div class="x-emblem sm" aria-hidden="true"><span>X</span></div>
+                <div class="bubble" id="xTalk" aria-live="polite">欢迎来到数字大陆，我是裁判X。</div>
               </div>
               <div class="round-banner" id="roundBanner"></div>
               <div class="coin-overlay" id="coinOverlay">
@@ -158,10 +136,48 @@
               </div>
             </div>
 
-            <div class="mu-wrap">
-              <div class="mu-title">⚔️ 三场对阵 <small>上等马 &gt; 中等马 &gt; 下等马 · 三局两胜</small></div>
-              <div class="matchup-table" id="matchupTable"></div>
+            <div class="zone-my-board">
+              <div class="board-row my" id="myBoard"></div>
             </div>
+
+            <div class="zone-my-hero">
+              <div class="hero-strip my">
+                <div class="hero-port my" id="myHero">
+                  <span class="hero-num" id="myHeroNum">102</span>
+                  <span class="hero-hp" id="myHp">20</span>
+                </div>
+                <button class="skill-btn" id="btnSkill" type="button" title="英雄技能">✦ 重组</button>
+                <div class="mana-wrap">
+                  <div class="mana-gems" id="manaGems"></div>
+                  <div class="mana-label" id="manaLabel">1/1</div>
+                </div>
+                <div class="deck-chip" id="myDeck">牌库 13</div>
+              </div>
+            </div>
+
+            <div class="zone-hand" id="myHand"></div>
+
+            <div class="zone-ctrl">
+              <button class="btn small" id="btnUpgrade" type="button">↑ 升级</button>
+              <button class="btn btn-primary" id="btnEnd" type="button">结束回合</button>
+              <button class="btn ghost small" id="btnFast" type="button">⏩ 快进</button>
+            </div>
+          </div>
+
+          <div id="upgradeOverlay" class="upgrade-overlay" hidden>
+            <div class="upgrade-box">
+              <div class="upgrade-title" id="upgradeTitle">为「12」末位追加数字</div>
+              <div class="upgrade-opts" id="upgradeOpts"></div>
+              <button class="btn ghost small" id="btnUpgradeCancel" type="button">取消</button>
+            </div>
+          </div>
+
+          <div id="passOverlay" class="pass-overlay" hidden>
+            <div class="pass-icon">📱</div>
+            <h2 id="passTitle">把设备交给对方</h2>
+            <p id="passDesc">请确认对方看不到手牌，再交给下一位选手。</p>
+            <button class="btn btn-primary big" id="btnPassOk" type="button">开始行动</button>
+            <button class="btn ghost small" id="btnPassCancel" type="button">← 取消对决</button>
           </div>
         </div>
 
@@ -170,7 +186,7 @@
           <div class="result-box" id="resultBox">
             <div class="result-badge" id="resultBadge">🏆</div>
             <h2 class="result-title" id="resultTitle">胜利！</h2>
-            <div class="result-score" id="resultScore">2 : 1</div>
+            <div class="result-score" id="resultScore">20 : 0</div>
             <div class="x-verdict" id="xVerdict"></div>
             <div class="pts-line" id="ptsLine"></div>
             <div class="streak-line" id="streakLine"></div>
@@ -179,6 +195,7 @@
           </div>
           <div class="result-btns" id="resultBtns">
             <button class="btn btn-primary big" id="btnAgain" type="button">⚔️ 再来一局</button>
+            <button class="btn ghost" id="btnShare" type="button">📤 分享战绩</button>
             <button class="btn ghost" id="btnSwitchCamp" type="button">🔁 换阵营</button>
             <button class="btn ghost" id="btnHome" type="button">🏠 回主页</button>
           </div>
@@ -193,7 +210,22 @@
   </div>
 </div>
 
-<!-- 全局弹窗：fixed，不参与舞台文档流 -->
+<!-- 新手引导 -->
+<div class="modal-mask" id="modalTutorial">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="tutTitle">
+    <div class="modal-head">
+      <h3 id="tutTitle">数字大陆入门</h3>
+    </div>
+    <div class="rule-body">
+      <p>这里只有 <b>0、1、2</b> 三个数字。费用是位数，攻击与生命就是数字本身。</p>
+      <p>选 <b>102营</b> 或 <b>201营</b>，把小牌升级合成图腾金卡，用随从打掉对方 20 点生命即胜。</p>
+      <p>3 分钟一局 · 单屏完成 · 随时再来。</p>
+    </div>
+    <button class="btn btn-primary big" id="btnTutOk" type="button">开始挑战 →</button>
+  </div>
+</div>
+
+<!-- 全局弹窗 -->
 <div class="modal-mask" id="modalAch">
   <div class="modal" role="dialog" aria-modal="true" aria-labelledby="achTitle">
     <div class="modal-head">
@@ -211,12 +243,13 @@
       <button class="icon-btn" data-close="modalRule" aria-label="关闭">✕</button>
     </div>
     <div class="rule-body">
-      <p><b>故事原型：</b>战国时田忌赛马，孙膑献计——「下等马对王上等马，上等马对王中等马，中等马对王下等马」，三局两胜，以下驷换一败，反败为胜。</p>
-      <p><b>玩法：</b>你是军师，为阵营排兵布阵。三匹马按顺序出战：🦄上等马(速3)、🐎中等马(速2)、🐴下等马(速1)。速度高者赢下该回合，同速则由裁判X掷硬币。</p>
-      <p><b>胜负：</b>三场对阵，先赢两场者胜。</p>
-      <p><b>秘诀：</b>对手阵型未知时，尝试「田忌妙计」布阵；若连用同一阵型，聪明的X会记住并反制你！</p>
-      <p><b>每日挑战：</b>每天X都会定一条特殊规则，完成可得额外奖励。</p>
-      <p><b>双人对战：</b>同一设备热座——102营先秘密布阵，把设备交给201营再布阵，同时揭晓开赛。友谊赛不计声望。</p>
+      <p><b>世界观：</b>数字大陆只有 0、1、2。102营与201营由同样的数字组成、顺序不同，世代相争。裁判 X 主持对决。</p>
+      <p><b>数字法则：</b>费用 = 位数；攻击 = 去掉末位的数（个位牌=自身）；生命 = 末位（0 → 生命1 + 嘲讽）。</p>
+      <p><b>升级合成：</b>花 1 水晶给手牌末位追加 0/1/2。把 10 养成 102、把 20 养成 201，就是图腾金卡。</p>
+      <p><b>英雄技能：</b>102「重组」弃1抽1；201「颠倒」下张费用-1。各 2 水晶、每回合 1 次。</p>
+      <p><b>胜负：</b>把对方英雄打到 0 即胜。牌库抽空后受到递增疲劳伤害。</p>
+      <p><b>每日挑战：</b>每天 X 定一条特殊规则，完成可得额外声望。</p>
+      <p><b>双人对战：</b>同一设备热座，先手由硬币决定；轮到谁看谁的手牌。友谊赛不计声望。</p>
     </div>
   </div>
 </div>
@@ -232,6 +265,13 @@
   </div>
 </div>
 
+<script src="js/data.js"></script>
+<script src="js/save.js"></script>
+<script src="js/audio.js"></script>
+<script src="js/match.js"></script>
+<script src="js/ai.js"></script>
+<script src="js/render.js"></script>
+<script src="js/share.js"></script>
 <script src="game.js"></script>
 </body>
 </html>
