@@ -1,0 +1,262 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>DSHHelper — Many harnesses. One desktop.</title>
+    <meta
+      name="description"
+      content="DSHHelper runs multiple isolated DeepSeek Harness workspaces on one desktop — with a built-in runtime, quad-pane layout, and shareable .dshpack packages."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="../../../css/base.css" />
+    <link rel="stylesheet" href="detail.css" />
+    <script src="../../../js/lang.js"></script>
+  </head>
+  <body class="dsh-detail">
+    <header class="site-nav">
+      <a class="site-nav__brand" href="../../../">x102201</a>
+      <nav class="site-lang" aria-label="Language">
+        <a href="./" data-lang-switch="en" class="is-active" hreflang="en">EN</a>
+        <span class="site-lang__sep" aria-hidden="true">|</span>
+        <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="dsh-hero">
+        <div class="dsh-hero__bg" aria-hidden="true"></div>
+        <div class="dsh-hero__inner">
+          <div>
+            <div class="dsh-kicker">
+              <img src="../assets/logo.png" alt="" width="48" height="48" />
+              <span>DSHHelper</span>
+            </div>
+            <h1>Many harnesses. One desktop.</h1>
+            <p class="dsh-hero__lede">
+              Run isolated DeepSeek Harness workspaces side by side — built-in
+              runtime, quad-pane layout, shareable <code>.dshpack</code> packages.
+            </p>
+            <div class="dsh-cta-row">
+              <a
+                class="dsh-btn dsh-btn--primary"
+                href="https://github.com/x102201/deepseek-harness-helper"
+                rel="noopener noreferrer"
+                >View repository</a
+              >
+              <a
+                class="dsh-btn dsh-btn--ghost"
+                href="https://github.com/x102201/deepseek-harness-helper/releases"
+                rel="noopener noreferrer"
+                >Get the app</a
+              >
+            </div>
+          </div>
+          <figure class="dsh-hero__shot">
+            <img
+              src="../assets/en/screenshot-main-light.png"
+              alt="DSHHelper workbench with multiple DeepSeek Harness panes"
+              width="1200"
+              height="750"
+              loading="eager"
+            />
+          </figure>
+        </div>
+      </section>
+
+      <section class="dsh-section">
+        <p class="dsh-section__label">Positioning</p>
+        <h2>A desktop shell for DeepSeek Harness</h2>
+        <p class="dsh-section__intro">
+          The model is the soul of an agent. A harness lets that agent work in
+          real environments. DSHHelper adds the desktop layer: several isolated
+          harness processes in one window, so you can compare, switch, and ship
+          configured workspaces without juggling terminals.
+        </p>
+        <p class="dsh-equation">Desktop = Instances + Runtime</p>
+      </section>
+
+      <section class="dsh-section">
+        <p class="dsh-section__label">Capabilities</p>
+        <h2>Everything you need to run harnesses locally</h2>
+        <p class="dsh-section__intro">
+          Multi-instance isolation, a cached Node + dsh runtime, and portable
+          packages — composed the way a desktop helper should feel.
+        </p>
+        <div class="dsh-pillars">
+          <article class="dsh-pillar">
+            <h3>Multi-instance</h3>
+            <p>
+              Several dsh environments side by side. Drag tabs to split into a
+              2×2 quad-pane — each pane keeps its own process and data.
+            </p>
+          </article>
+          <article class="dsh-pillar">
+            <h3>Built-in runtime</h3>
+            <p>
+              Node.js and DeepSeek Harness are cached under your data folder.
+              First-run wizard downloads what you need; later starts stay fast.
+            </p>
+          </article>
+          <article class="dsh-pillar">
+            <h3>.dshpack packages</h3>
+            <p>
+              Export presets, patches, and settings. Import a ready workspace
+              with optional machine-bound or password protection.
+            </p>
+          </article>
+        </div>
+      </section>
+
+      <section class="dsh-section">
+        <p class="dsh-section__label">Quad-pane</p>
+        <h2>See more than one harness at once</h2>
+        <p class="dsh-section__intro">
+          Open instances from the sidebar, then drag tabs to window edges to
+          split. Light and dark shell themes affect the helper UI only — not the
+          pages inside each harness.
+        </p>
+        <div class="dsh-split">
+          <figure class="dsh-media">
+            <img
+              src="../assets/en/screenshot-main-light.png"
+              alt="Quad-pane layout in light appearance"
+              width="1200"
+              height="750"
+              loading="lazy"
+            />
+            <figcaption class="dsh-media__caption">Light shell · quad-pane</figcaption>
+          </figure>
+          <figure class="dsh-media">
+            <img
+              src="../assets/en/screenshot-main-dark.png"
+              alt="Quad-pane layout in dark appearance"
+              width="1200"
+              height="750"
+              loading="lazy"
+            />
+            <figcaption class="dsh-media__caption">Dark shell · quad-pane</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="dsh-section">
+        <p class="dsh-section__label">Packages</p>
+        <h2>Ship a configured workspace as one file</h2>
+        <p class="dsh-section__intro">
+          A <code>.dshpack</code> packages what teammates or clients need to
+          recreate an environment — then import it through the sidebar wizard.
+        </p>
+        <div class="dsh-split dsh-split--reverse">
+          <div class="dsh-split__copy">
+            <figure class="dsh-media">
+              <img
+                src="../assets/en/dshpack-flow.svg"
+                alt="Export and import flow for .dshpack packages"
+                width="720"
+                height="240"
+                loading="lazy"
+              />
+              <figcaption class="dsh-media__caption">Export → share → import</figcaption>
+            </figure>
+          </div>
+          <figure class="dsh-media">
+            <img
+              src="../assets/en/screenshot-import.png"
+              alt="Import package dialog in DSHHelper"
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="dsh-media__caption">Import dialog</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="dsh-section">
+        <p class="dsh-section__label">Get started</p>
+        <h2>Try it now on your machine</h2>
+        <p class="dsh-section__intro">
+          Installers ship on GitHub Releases for Windows, macOS, and Linux.
+          Follow the first-run wizard, then open more instances in a quad-pane.
+        </p>
+        <ol class="dsh-steps">
+          <li>
+            <strong>Install</strong>
+            <span>Download the build for your platform from Releases.</span>
+          </li>
+          <li>
+            <strong>Wizard</strong>
+            <span>Pick a data directory, pull the runtime, create the first instance.</span>
+          </li>
+          <li>
+            <strong>Quad-pane</strong>
+            <span>Add instances and drag tabs into a 2×2 layout.</span>
+          </li>
+        </ol>
+        <div class="dsh-cta-row" style="margin-top: 28px">
+          <a
+            class="dsh-btn dsh-btn--primary"
+            href="https://github.com/x102201/deepseek-harness-helper/releases"
+            rel="noopener noreferrer"
+            >Get the app</a
+          >
+          <a
+            class="dsh-btn dsh-btn--ghost"
+            href="https://www.deepseek.com/harness/"
+            rel="noopener noreferrer"
+            >About DeepSeek Harness</a
+          >
+        </div>
+        <figure class="dsh-media" style="margin-top: 36px">
+          <img
+            src="../assets/en/screenshot-wizard.png"
+            alt="First-run wizard in DSHHelper"
+            width="900"
+            height="600"
+            loading="lazy"
+          />
+          <figcaption class="dsh-media__caption">First-run wizard</figcaption>
+        </figure>
+      </section>
+
+      <section class="dsh-section dsh-close">
+        <p class="dsh-section__label">Closing</p>
+        <h2>Built for DeepSeek Harness on your desktop</h2>
+        <p>
+          Documentation and installers live in the public repository. Inside each
+          tab you still get the DeepSeek Harness experience — DSHHelper keeps the
+          instances running together.
+        </p>
+        <div class="dsh-cta-row" style="justify-content: center">
+          <a
+            class="dsh-btn dsh-btn--primary"
+            href="https://github.com/x102201/deepseek-harness-helper"
+            rel="noopener noreferrer"
+            >View repository</a
+          >
+        </div>
+        <nav class="dsh-meta" aria-label="Page links">
+          <a href="../../../">← Back to home</a>
+          <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文详情</a>
+        </nav>
+      </section>
+    </main>
+
+    <footer class="site-footer">
+      <p>
+        DSHHelper ·
+        <a href="https://github.com/x102201/deepseek-harness-helper" rel="noopener noreferrer"
+          >github.com/x102201/deepseek-harness-helper</a
+        >
+      </p>
+    </footer>
+
+    <script src="../../../js/projects.js" defer></script>
+  </body>
+</html>

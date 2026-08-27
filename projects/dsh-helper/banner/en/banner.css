@@ -1,0 +1,118 @@
+/* Banner source — synced into home pages */
+.banner-dsh-helper {
+  --dsh-blue: #1d4ed8;
+  --dsh-blue-soft: #6ca6ff;
+  --dsh-ink: #0f172a;
+  --dsh-muted: #475569;
+  --dsh-line: rgba(29, 78, 216, 0.16);
+  display: block;
+  color: inherit;
+  text-decoration: none;
+  overflow: hidden;
+  border-bottom: 1px solid var(--dsh-line);
+  background:
+    linear-gradient(135deg, rgba(108, 166, 255, 0.18) 0%, transparent 42%),
+    linear-gradient(180deg, #f8fbff 0%, #eef3fb 100%);
+  animation: site-fade-up 0.7s ease 0.08s both;
+}
+
+.banner-dsh-helper:hover {
+  color: inherit;
+}
+
+.banner-dsh-helper__inner {
+  display: grid;
+  gap: 28px;
+  width: min(1120px, 100%);
+  margin: 0 auto;
+  padding: 48px 20px 40px;
+}
+
+.banner-dsh-helper__brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 18px;
+}
+
+.banner-dsh-helper__logo {
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  box-shadow: 0 8px 20px rgba(29, 78, 216, 0.22);
+}
+
+.banner-dsh-helper__name {
+  font-family: var(--font-display, "Sora", sans-serif);
+  font-weight: 700;
+  font-size: 1.15rem;
+  letter-spacing: -0.03em;
+}
+
+.banner-dsh-helper__title {
+  margin: 0 0 14px;
+  font-family: var(--font-display, "Sora", sans-serif);
+  font-size: clamp(2rem, 5.5vw, 3.35rem);
+  font-weight: 700;
+  line-height: 1.08;
+  letter-spacing: -0.045em;
+  color: var(--dsh-ink);
+}
+
+.banner-dsh-helper__lede {
+  margin: 0;
+  max-width: 36rem;
+  font-size: 1.05rem;
+  line-height: 1.6;
+  color: var(--dsh-muted);
+}
+
+.banner-dsh-helper__cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 22px;
+  min-height: 44px;
+  font-weight: 600;
+  color: var(--dsh-blue);
+}
+
+.banner-dsh-helper__cta span {
+  transition: transform 0.2s ease;
+}
+
+.banner-dsh-helper:hover .banner-dsh-helper__cta span {
+  transform: translateX(4px);
+}
+
+.banner-dsh-helper__visual {
+  position: relative;
+  border-radius: 0;
+  overflow: hidden;
+  box-shadow:
+    0 0 0 1px rgba(15, 23, 42, 0.06),
+    0 24px 48px rgba(15, 23, 42, 0.12);
+  transform: translateY(0);
+  transition: transform 0.35s ease, box-shadow 0.35s ease;
+}
+
+.banner-dsh-helper:hover .banner-dsh-helper__visual {
+  transform: translateY(-4px);
+  box-shadow:
+    0 0 0 1px rgba(29, 78, 216, 0.18),
+    0 28px 56px rgba(29, 78, 216, 0.18);
+}
+
+.banner-dsh-helper__visual img {
+  width: 100%;
+  display: block;
+}
+
+@media (min-width: 768px) {
+  .banner-dsh-helper__inner {
+    grid-template-columns: 1.05fr 1fr;
+    align-items: center;
+    padding: 64px 32px 56px;
+    gap: 40px;
+  }
+}
