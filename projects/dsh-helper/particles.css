@@ -13,6 +13,7 @@ body.dsh-detail:has(.dsh-helper-particles) main,
 body.dsh-detail:has(.dsh-helper-particles) .site-footer {
   position: relative;
   z-index: 1;
+  isolation: isolate;
 }
 
 /* Detail page — full-viewport layer */

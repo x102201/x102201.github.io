@@ -15,6 +15,7 @@
     }
 
     var mode = canvas.getAttribute("data-particles-mode") || "detail";
+    canvas.style.pointerEvents = "none";
   var PALETTE = ["#6CA6FF", "#5B96F5", "#3B7BED", "#2563EB", "#1D4ED8"];
 
   var ctx = canvas.getContext("2d");
@@ -147,19 +148,41 @@
 
   function setPointer(clientX, clientY) {
     if (isEmbeddedHome()) {
-      var rect = canvas.parentElement.getBoundingClientRect();
-      mouse.tx = clientX - rect.left;
-      mouse.ty = clientY - rect.top;
-      mouse.active =
+      var banner = canvas.parentElement;
+      var rect = banner.getBoundingClientRect();
+      var inBanner =
         clientX >= rect.left &&
         clientX <= rect.right &&
         clientY >= rect.top &&
         clientY <= rect.bottom;
+      var copyMax = rect.top + rect.height * 0.58;
+
+      mouse.tx = clientX - rect.left;
+      mouse.ty = clientY - rect.top;
+      mouse.active = inBanner && clientY <= copyMax;
       return;
     }
+
+    if (mode === "detail") {
+      var hero = document.querySelector(".dsh-hero");
+      mouse.tx = clientX;
+      mouse.ty = clientY;
+      if (!hero) {
+        mouse.active = false;
+        return;
+      }
+      var hrect = hero.getBoundingClientRect();
+      mouse.active =
+        clientX >= hrect.left &&
+        clientX <= hrect.right &&
+        clientY >= hrect.top &&
+        clientY <= hrect.bottom;
+      return;
+    }
+
     mouse.tx = clientX;
     mouse.ty = clientY;
-    mouse.active = true;
+    mouse.active = false;
   }
 
   function applyMouseForce(p) {

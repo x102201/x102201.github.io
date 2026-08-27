@@ -237,8 +237,8 @@
   }
 
   function getNavOffset() {
-    var nav = document.querySelector(".site-nav");
-    return nav ? Math.ceil(nav.getBoundingClientRect().height) : 56;
+    var shell = document.querySelector(".site-nav-shell");
+    return shell ? Math.ceil(shell.getBoundingClientRect().height) : 48;
   }
 
   function bindNavScroll() {

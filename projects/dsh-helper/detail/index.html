@@ -25,14 +25,17 @@
       data-particles-mode="detail"
       aria-hidden="true"
     ></canvas>
-    <header class="site-nav">
-      <a class="site-nav__brand" href="../../../">x102201</a>
-      <nav class="site-nav__content" data-site-content-nav></nav>
-      <nav class="site-lang" aria-label="Language">
-        <a href="./" data-lang-switch="en" class="is-active" hreflang="en">EN</a>
-        <span class="site-lang__sep" aria-hidden="true">|</span>
-        <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文</a>
-      </nav>
+    <header class="site-nav-shell">
+      <div class="site-nav">
+        <a class="site-nav__brand" href="../../../">x102201</a>
+        <nav class="site-nav__content" data-site-content-nav></nav>
+        <nav class="site-lang" aria-label="Language">
+          <div class="site-lang__toggle">
+            <a href="./" data-lang-switch="en" class="is-active" hreflang="en">EN</a>
+            <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文</a>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main>
@@ -230,7 +233,15 @@
               <span>Add instances and drag tabs into a 2×2 layout.</span>
             </li>
           </ol>
-          <p class="dsh-release-note">github.com/x102201/deepseek-harness-helper/releases</p>
+          <button
+            type="button"
+            class="dsh-release-note"
+            data-copy-url="https://github.com/x102201/deepseek-harness-helper/releases"
+            aria-label="Copy GitHub Releases URL"
+          >
+            <span class="dsh-release-note__url">github.com/x102201/deepseek-harness-helper/releases</span>
+            <span class="dsh-release-note__hint">Copy</span>
+          </button>
           <div class="dsh-cta-row">
             <a
               class="dsh-btn dsh-btn--primary"
@@ -282,6 +293,7 @@
 
     <script src="../../../js/projects.js"></script>
     <script src="../../../js/nav.js"></script>
+    <script src="detail.js"></script>
     <script src="../particles.js"></script>
   </body>
 </html>

@@ -20,14 +20,17 @@
     <script src="js/lang.js"></script>
   </head>
   <body>
-    <header class="site-nav">
-      <a class="site-nav__brand" href="./">x102201</a>
-      <nav class="site-nav__content" data-site-content-nav></nav>
-      <nav class="site-lang" aria-label="Language">
-        <a href="./" data-lang-switch="en" class="is-active" hreflang="en">EN</a>
-        <span class="site-lang__sep" aria-hidden="true">|</span>
-        <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文</a>
-      </nav>
+    <header class="site-nav-shell">
+      <div class="site-nav">
+        <a class="site-nav__brand" href="./">x102201</a>
+        <nav class="site-nav__content" data-site-content-nav></nav>
+        <nav class="site-lang" aria-label="Language">
+          <div class="site-lang__toggle">
+            <a href="./" data-lang-switch="en" class="is-active" hreflang="en">EN</a>
+            <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文</a>
+          </div>
+        </nav>
+      </div>
     </header>
 
     <main class="site-main">

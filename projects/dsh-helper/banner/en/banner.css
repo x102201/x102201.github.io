@@ -121,6 +121,7 @@
 
 .banner-dsh-helper__visual {
   position: relative;
+  z-index: 1;
   margin-top: clamp(40px, 6vw, 72px);
   overflow: hidden;
   background: var(--site-surface, #fff);
