@@ -1,5 +1,6 @@
 /**
- * Project registry only — order and paths. Does not generate page templates.
+ * Project registry — order, titles, paths.
+ * Used by nav.js for content navigation and by maintainers for banner anchors.
  */
 window.SITE_PROJECTS = [
   {

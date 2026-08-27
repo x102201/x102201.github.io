@@ -11,16 +11,18 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../css/base.css" />
     <link rel="stylesheet" href="../projects/dsh-helper/banner/zh/banner.css" />
+    <link rel="stylesheet" href="../projects/dsh-helper/particles.css" />
     <script src="../js/lang.js"></script>
   </head>
   <body>
     <header class="site-nav">
       <a class="site-nav__brand" href="./">x102201</a>
+      <nav class="site-nav__content" data-site-content-nav></nav>
       <nav class="site-lang" aria-label="语言">
         <a href="../" data-lang-switch="en" hreflang="en">EN</a>
         <span class="site-lang__sep" aria-hidden="true">|</span>
@@ -30,33 +32,46 @@
 
     <main class="site-main">
       <a
+        id="banner-dsh-helper"
         class="banner-dsh-helper"
         href="../projects/dsh-helper/detail/zh/"
-        aria-label="DSHHelper — 多开 Harness，一台桌面。"
+        data-project-id="dsh-helper"
+        aria-label="DSHHelper — 多实例并行，一台桌面。"
       >
+        <canvas
+          class="dsh-helper-particles"
+          data-particles-mode="home"
+          aria-hidden="true"
+        ></canvas>
         <div class="banner-dsh-helper__inner">
           <div class="banner-dsh-helper__copy">
-            <div class="banner-dsh-helper__brand">
+            <p class="banner-dsh-helper__eyebrow">
               <img
                 class="banner-dsh-helper__logo"
                 src="../projects/dsh-helper/assets/logo.png"
                 alt=""
-                width="44"
-                height="44"
+                width="28"
+                height="28"
               />
-              <span class="banner-dsh-helper__name">DSHHelper</span>
-            </div>
-            <h1 class="banner-dsh-helper__title">多开 Harness，一台桌面。</h1>
-            <p class="banner-dsh-helper__lede">
-              在同一台电脑上并行、隔离运行多套 DeepSeek Harness 工作间——内置运行时、四分屏布局，可用
-              <code>.dshpack</code> 分发环境。
+              DeepSeek Harness · 桌面伴侣
             </p>
-            <p class="banner-dsh-helper__cta">查看项目 <span aria-hidden="true">→</span></p>
+            <h1 class="banner-dsh-helper__title">多实例并行，<br />一台桌面。</h1>
+            <p class="banner-dsh-helper__lede">
+              DSHHelper 在同一台电脑上并行、隔离运行多套 DeepSeek Harness
+              工作间——内置运行时、四分屏布局，并可用
+              <code>.dshpack</code> 把配好的环境交付给团队。
+            </p>
+            <ul class="banner-dsh-helper__tags">
+              <li>多开实例</li>
+              <li>内置运行时</li>
+              <li>.dshpack</li>
+            </ul>
+            <p class="banner-dsh-helper__cta">了解 DSHHelper <span aria-hidden="true">→</span></p>
           </div>
           <div class="banner-dsh-helper__visual">
             <img
               src="../projects/dsh-helper/assets/zh/screenshot-main-light.png"
-              alt="DSHHelper 浅色外观下的四分屏工作台"
+              alt="DSHHelper 四分屏工作台"
               width="1200"
               height="750"
               loading="eager"
@@ -67,9 +82,11 @@
     </main>
 
     <footer class="site-footer">
-      <p>个人 GitHub Pages 橱窗 · <a href="https://github.com/x102201">github.com/x102201</a></p>
+      <p>个人 GitHub Pages · <a href="https://github.com/x102201">github.com/x102201</a></p>
     </footer>
 
-    <script src="../js/projects.js" defer></script>
+    <script src="../js/projects.js"></script>
+    <script src="../js/nav.js"></script>
+    <script src="../projects/dsh-helper/particles.js"></script>
   </body>
 </html>

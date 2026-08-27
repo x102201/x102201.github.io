@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DSHHelper — 多开 Harness，一台桌面。</title>
+    <title>DSHHelper — 多实例并行，一台桌面。</title>
     <meta
       name="description"
       content="DSHHelper 在同一台电脑上并行、隔离运行多套 DeepSeek Harness 工作间，内置运行时、四分屏布局，并支持用 .dshpack 分发环境。"
@@ -11,16 +11,23 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
-      href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,400;0,9..40,500;0,9..40,600;0,9..40,700;1,9..40,400&family=Sora:wght@600;700&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Outfit:wght@500;600;700&family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;1,400&display=swap"
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../../../css/base.css" />
     <link rel="stylesheet" href="../detail.css" />
+    <link rel="stylesheet" href="../../particles.css" />
     <script src="../../../../js/lang.js"></script>
   </head>
   <body class="dsh-detail">
+    <canvas
+      class="dsh-helper-particles"
+      data-particles-mode="detail"
+      aria-hidden="true"
+    ></canvas>
     <header class="site-nav">
       <a class="site-nav__brand" href="../../../../zh/">x102201</a>
+      <nav class="site-nav__content" data-site-content-nav></nav>
       <nav class="site-lang" aria-label="语言">
         <a href="../" data-lang-switch="en" hreflang="en">EN</a>
         <span class="site-lang__sep" aria-hidden="true">|</span>
@@ -30,91 +37,145 @@
 
     <main>
       <section class="dsh-hero">
-        <div class="dsh-hero__bg" aria-hidden="true"></div>
         <div class="dsh-hero__inner">
-          <div>
-            <div class="dsh-kicker">
-              <img src="../../assets/logo.png" alt="" width="48" height="48" />
-              <span>DSHHelper</span>
-            </div>
-            <h1>多开 Harness，一台桌面。</h1>
-            <p class="dsh-hero__lede">
-              在同一台电脑上并行、隔离运行多套 DeepSeek Harness 工作间——内置运行时、四分屏布局，可用
-              <code>.dshpack</code> 分发环境。
-            </p>
-            <div class="dsh-cta-row">
-              <a
-                class="dsh-btn dsh-btn--primary"
-                href="https://github.com/x102201/deepseek-harness-helper"
-                rel="noopener noreferrer"
-                >查看仓库</a
-              >
-              <a
-                class="dsh-btn dsh-btn--ghost"
-                href="https://github.com/x102201/deepseek-harness-helper/releases"
-                rel="noopener noreferrer"
-                >获取应用</a
-              >
-            </div>
+          <p class="dsh-eyebrow">
+            <img src="../../assets/logo.png" alt="" width="28" height="28" />
+            DeepSeek Harness · 桌面伴侣
+          </p>
+          <h1>多实例并行，<br />一台桌面。</h1>
+          <p class="dsh-hero__lede">
+            DSHHelper 在同一台电脑上并行、隔离运行多套 DeepSeek Harness
+            工作间——内置运行时、四分屏布局，并可用
+            <code>.dshpack</code> 分发环境。
+          </p>
+          <div class="dsh-cta-row">
+            <a
+              class="dsh-btn dsh-btn--primary"
+              href="https://github.com/x102201/deepseek-harness-helper/releases"
+              rel="noopener noreferrer"
+              >获取应用</a
+            >
+            <a
+              class="dsh-btn dsh-btn--ghost"
+              href="https://github.com/x102201/deepseek-harness-helper"
+              rel="noopener noreferrer"
+              >查看仓库</a
+            >
           </div>
-          <figure class="dsh-hero__shot">
-            <img
-              src="../../assets/zh/screenshot-main-light.png"
-              alt="DSHHelper 多窗格工作台界面"
-              width="1200"
-              height="750"
-              loading="eager"
-            />
-          </figure>
+        </div>
+        <div class="dsh-hero__shot">
+          <img
+            src="../../assets/zh/screenshot-main-light.png"
+            alt="DSHHelper 多窗格工作台界面"
+            width="1200"
+            height="750"
+            loading="eager"
+          />
         </div>
       </section>
 
-      <section class="dsh-section">
-        <p class="dsh-section__label">定位</p>
-        <h2>面向 DeepSeek Harness 的桌面外壳</h2>
-        <p class="dsh-section__intro">
-          模型是 Agent 的灵魂，Harness 让它在真实环境中持续工作。DSHHelper
-          补上桌面这一层：同一窗口内并行多套隔离的 Harness
-          进程，方便对比、切换，并把配好的工作间交付出去——不必再手撕一堆终端。
+      <section class="dsh-equation-band">
+        <h2>DSHHelper 让 Harness 在桌面上持续运行</h2>
+        <p>
+          模型是 Agent 的灵魂，Harness 让它理解环境并在真实场景中持续工作。DSHHelper
+          补上桌面这一层——同一窗口内并行多套隔离的 Harness 进程。
         </p>
         <p class="dsh-equation">桌面 = 多实例 + 运行时</p>
       </section>
 
-      <section class="dsh-section">
+      <section class="dsh-section dsh-section--center">
         <p class="dsh-section__label">能力</p>
-        <h2>本地跑多套 Harness 所需的一切</h2>
+        <h2>用实例组合你的桌面</h2>
         <p class="dsh-section__intro">
-          多开隔离、缓存式 Node + dsh 运行时，以及可移植制品——按桌面助手该有的方式组合在一起。
+          多开隔离、缓存式 Node + dsh 运行时，以及可移植制品——本地跑多套
+          Harness 所需的三块拼图，不必再手撕一堆终端。
         </p>
         <div class="dsh-pillars">
           <article class="dsh-pillar">
-            <h3>多开实例</h3>
+            <span class="dsh-pillar__tag">多开实例</span>
+            <h3>四分屏布局</h3>
             <p>
-              多套 dsh 环境并排运行。拖拽标签即可分成 2×2 四分屏，每个窗格拥有独立进程与数据。
+              多套 dsh 环境并排运行。拖拽标签即可分成 2×2 网格——每个窗格拥有独立进程、端口与数据。
             </p>
           </article>
           <article class="dsh-pillar">
-            <h3>内置运行时</h3>
+            <span class="dsh-pillar__tag">内置运行时</span>
+            <h3>Node + dsh，本地缓存</h3>
             <p>
-              Node.js 与 DeepSeek Harness 缓存于数据目录。首次向导完成下载，之后启动更快。
+              首次向导把所需运行时下载到数据目录。之后启动跳过等待——环境始终就绪在磁盘上。
             </p>
           </article>
           <article class="dsh-pillar">
-            <h3>.dshpack 制品</h3>
+            <span class="dsh-pillar__tag">可移植制品</span>
+            <h3>导出与导入 .dshpack</h3>
             <p>
-              导出预设、补丁与设置；导入即可复现工作间，支持机器码或密码等授权方式。
+              把预设、补丁与设置打成单个文件。通过侧栏向导导入，支持机器码或密码等授权方式。
             </p>
           </article>
         </div>
       </section>
 
+      <section class="dsh-section--band">
+        <div class="dsh-section__inner">
+          <p class="dsh-section__label">设计思路</p>
+          <h2>默认隔离，<br />按需分发。</h2>
+
+          <div class="dsh-feature">
+            <div class="dsh-feature__copy">
+              <h3>同时看见不止一套 Harness</h3>
+              <p>
+                从侧栏打开实例，再把标签拖到窗口边缘完成分屏。浅色 / 深色外观只影响助手壳界面，不会改写实例内的 Harness 页面主题。
+              </p>
+            </div>
+            <figure class="dsh-media">
+              <img
+                src="../../assets/zh/screenshot-main-dark.png"
+                alt="深色外观下的四分屏布局"
+                width="1200"
+                height="750"
+                loading="lazy"
+              />
+              <figcaption class="dsh-media__caption">深色外壳 · 2×2 四分屏</figcaption>
+            </figure>
+          </div>
+
+          <div class="dsh-feature dsh-feature--reverse">
+            <div class="dsh-feature__copy">
+              <h3>把配好的工作间打成一个文件</h3>
+              <p>
+                <code>.dshpack</code> 打包团队或客户复现环境所需的配置——从实例详情页导出，再通过侧栏向导导入。
+              </p>
+            </div>
+            <figure class="dsh-media">
+              <img
+                src="../../assets/zh/screenshot-import.png"
+                alt="DSHHelper 导入制品对话框"
+                width="900"
+                height="600"
+                loading="lazy"
+              />
+              <figcaption class="dsh-media__caption">导入对话框</figcaption>
+            </figure>
+          </div>
+        </div>
+      </section>
+
       <section class="dsh-section">
-        <p class="dsh-section__label">四分屏</p>
-        <h2>同时看见不止一套 Harness</h2>
+        <p class="dsh-section__label">制品</p>
+        <h2>导出 → 分享 → 导入</h2>
         <p class="dsh-section__intro">
-          从侧栏打开实例，再把标签拖到窗口边缘完成分屏。浅色 / 深色外观只影响助手壳界面，不会改写实例内的 Harness 页面主题。
+          从配好的实例到团队开箱即用的工作间，完整链路一目了然。
         </p>
-        <div class="dsh-split">
+        <figure class="dsh-media" style="margin-top: 40px">
+          <img
+            src="../../assets/zh/dshpack-flow.svg"
+            alt=".dshpack 导出与导入流程"
+            width="720"
+            height="240"
+            loading="lazy"
+          />
+        </figure>
+        <div class="dsh-split" style="margin-top: 24px">
           <figure class="dsh-media">
             <img
               src="../../assets/zh/screenshot-main-light.png"
@@ -127,103 +188,63 @@
           </figure>
           <figure class="dsh-media">
             <img
-              src="../../assets/zh/screenshot-main-dark.png"
-              alt="深色外观下的四分屏布局"
-              width="1200"
-              height="750"
-              loading="lazy"
-            />
-            <figcaption class="dsh-media__caption">深色外壳 · 四分屏</figcaption>
-          </figure>
-        </div>
-      </section>
-
-      <section class="dsh-section">
-        <p class="dsh-section__label">制品</p>
-        <h2>把配好的工作间打成一个文件</h2>
-        <p class="dsh-section__intro">
-          <code>.dshpack</code> 打包团队或客户复现环境所需的配置，再通过侧栏向导完成导入。
-        </p>
-        <div class="dsh-split dsh-split--reverse">
-          <div class="dsh-split__copy">
-            <figure class="dsh-media">
-              <img
-                src="../../assets/zh/dshpack-flow.svg"
-                alt=".dshpack 导出与导入流程"
-                width="720"
-                height="240"
-                loading="lazy"
-              />
-              <figcaption class="dsh-media__caption">导出 → 分享 → 导入</figcaption>
-            </figure>
-          </div>
-          <figure class="dsh-media">
-            <img
-              src="../../assets/zh/screenshot-import.png"
-              alt="DSHHelper 导入制品对话框"
+              src="../../assets/zh/screenshot-wizard.png"
+              alt="DSHHelper 首次运行向导"
               width="900"
               height="600"
               loading="lazy"
             />
-            <figcaption class="dsh-media__caption">导入对话框</figcaption>
+            <figcaption class="dsh-media__caption">首次运行向导</figcaption>
           </figure>
         </div>
       </section>
 
-      <section class="dsh-section">
-        <p class="dsh-section__label">开始使用</p>
-        <h2>在你的机器上立刻试用</h2>
-        <p class="dsh-section__intro">
-          安装包发布在 GitHub Releases，覆盖 Windows、macOS 与 Linux。按首次向导完成配置，再用四分屏打开更多实例。
-        </p>
-        <ol class="dsh-steps">
-          <li>
-            <strong>安装</strong>
-            <span>从 Releases 下载对应平台的安装包。</span>
-          </li>
-          <li>
-            <strong>向导</strong>
-            <span>选择数据目录、拉取运行时，并创建首个实例。</span>
-          </li>
-          <li>
-            <strong>四分屏</strong>
-            <span>新建更多实例，拖拽标签排成 2×2 布局。</span>
-          </li>
-        </ol>
-        <div class="dsh-cta-row" style="margin-top: 28px">
-          <a
-            class="dsh-btn dsh-btn--primary"
-            href="https://github.com/x102201/deepseek-harness-helper/releases"
-            rel="noopener noreferrer"
-            >获取应用</a
-          >
-          <a
-            class="dsh-btn dsh-btn--ghost"
-            href="https://www.deepseek.com/harness/"
-            rel="noopener noreferrer"
-            >了解 DeepSeek Harness</a
-          >
+      <section class="dsh-section dsh-section--band dsh-start">
+        <div class="dsh-section__inner">
+          <p class="dsh-section__label">开始使用</p>
+          <h2>在你的机器上立刻试用</h2>
+          <p class="dsh-section__intro">
+            安装包发布在 GitHub Releases，覆盖 Windows、macOS 与 Linux。
+          </p>
+          <ol class="dsh-steps">
+            <li>
+              <strong>安装</strong>
+              <span>从 Releases 下载对应平台的安装包。</span>
+            </li>
+            <li>
+              <strong>向导</strong>
+              <span>选择数据目录、拉取运行时，并创建首个实例。</span>
+            </li>
+            <li>
+              <strong>四分屏</strong>
+              <span>新建更多实例，拖拽标签排成 2×2 布局。</span>
+            </li>
+          </ol>
+          <p class="dsh-release-note">github.com/x102201/deepseek-harness-helper/releases</p>
+          <div class="dsh-cta-row">
+            <a
+              class="dsh-btn dsh-btn--primary"
+              href="https://github.com/x102201/deepseek-harness-helper/releases"
+              rel="noopener noreferrer"
+              >获取应用</a
+            >
+            <a
+              class="dsh-btn dsh-btn--ghost"
+              href="https://www.deepseek.com/harness/"
+              rel="noopener noreferrer"
+              >了解 DeepSeek Harness</a
+            >
+          </div>
         </div>
-        <figure class="dsh-media" style="margin-top: 36px">
-          <img
-            src="../../assets/zh/screenshot-wizard.png"
-            alt="DSHHelper 首次运行向导"
-            width="900"
-            height="600"
-            loading="lazy"
-          />
-          <figcaption class="dsh-media__caption">首次运行向导</figcaption>
-        </figure>
       </section>
 
       <section class="dsh-section dsh-close">
-        <p class="dsh-section__label">收尾</p>
-        <h2>为桌面上的 DeepSeek Harness 而做</h2>
-        <p>
-          公开仓库提供文档与安装包。每个标签页内仍是 DeepSeek Harness
-          本身——DSHHelper 负责让多套实例在同一桌面上一起工作。
+        <p class="dsh-section__label">为 DeepSeek Harness 而做</p>
+        <h2>每个标签页里仍是 Harness，<br />一个桌面统管全部实例。</h2>
+        <p class="dsh-section__intro">
+          公开仓库提供文档与安装包。DSHHelper 负责让多套实例在同一桌面上一起工作——实例内体验不变。
         </p>
-        <div class="dsh-cta-row" style="justify-content: center">
+        <div class="dsh-cta-row" style="justify-content: center; margin-top: 32px">
           <a
             class="dsh-btn dsh-btn--primary"
             href="https://github.com/x102201/deepseek-harness-helper"
@@ -247,6 +268,8 @@
       </p>
     </footer>
 
-    <script src="../../../../js/projects.js" defer></script>
+    <script src="../../../../js/projects.js"></script>
+    <script src="../../../../js/nav.js"></script>
+    <script src="../../particles.js"></script>
   </body>
 </html>
