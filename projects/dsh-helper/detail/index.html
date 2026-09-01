@@ -3,10 +3,10 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
-    <title>DSHHelper — Many instances. One desktop.</title>
+    <title>DSHHelper — Unlimited isolated instances on one desktop</title>
     <meta
       name="description"
-      content="DSHHelper runs multiple isolated DeepSeek Harness workspaces on one desktop — built-in runtime, quad-pane layout, and shareable .dshpack packages."
+      content="A single dsh cannot host multiple workloads. DSHHelper runs isolated DeepSeek Harness instances in one workspace — then exports a configured instance as a .dshpack."
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
@@ -15,16 +15,12 @@
       rel="stylesheet"
     />
     <link rel="stylesheet" href="../../../css/base.css" />
-    <link rel="stylesheet" href="detail.css" />
     <link rel="stylesheet" href="../particles.css" />
+    <link rel="stylesheet" href="detail.css" />
     <script src="../../../js/lang.js"></script>
   </head>
   <body class="dsh-detail">
-    <canvas
-      class="dsh-helper-particles"
-      data-particles-mode="detail"
-      aria-hidden="true"
-    ></canvas>
+    <canvas class="dsh-helper-particles" data-particles-mode="detail" aria-hidden="true"></canvas>
     <header class="site-nav-shell">
       <div class="site-nav">
         <a class="site-nav__brand" href="../../../">x102201</a>
@@ -38,25 +34,31 @@
       </div>
     </header>
 
+    <nav class="dsh-beats" aria-label="Story beats">
+      <a href="#dsh-isolate" data-beat="1"><span>01</span>Isolate</a>
+      <a href="#dsh-collab" data-beat="2"><span>02</span>Collaborate</a>
+      <a href="#dsh-sell" data-beat="3"><span>03</span>Monetize</a>
+    </nav>
+
     <main>
       <section class="dsh-hero">
         <div class="dsh-hero__inner">
           <p class="dsh-eyebrow">
             <img src="../assets/logo.png" alt="" width="28" height="28" />
-            DeepSeek Harness · Desktop companion
+            Multi-instance DeepSeek Harness
           </p>
-          <h1>Many instances.<br />One desktop.</h1>
+          <h1>Unlimited isolated instances<br />on one desktop</h1>
           <p class="dsh-hero__lede">
-            DSHHelper runs multiple isolated DeepSeek Harness workspaces on one
-            machine — built-in runtime, quad-pane layout, and shareable
-            <code>.dshpack</code> packages.
+            Support, engineering, and testing cannot share one dsh.
+            <strong>Each instance is a complete, isolated Harness</strong> — in one workspace,
+            ready to export when an instance is configured.
           </p>
           <div class="dsh-cta-row">
             <a
               class="dsh-btn dsh-btn--primary"
               href="https://github.com/x102201/deepseek-harness-helper/releases"
               rel="noopener noreferrer"
-              >Get the app</a
+              >Download for desktop</a
             >
             <a
               class="dsh-btn dsh-btn--ghost"
@@ -65,6 +67,7 @@
               >View repository</a
             >
           </div>
+          <p class="dsh-proof">Windows · macOS · Linux · GitHub Releases</p>
         </div>
         <div class="dsh-hero__shot">
           <img
@@ -74,132 +77,239 @@
             height="750"
             loading="eager"
           />
-        </div>
-      </section>
-
-      <section class="dsh-equation-band">
-        <h2>DSHHelper keeps harnesses running on your desktop</h2>
-        <p>
-          The model is the soul of an agent. A harness lets it understand its
-          environment and keep working in real settings. DSHHelper adds the
-          desktop layer — several isolated harness processes in one window.
-        </p>
-        <p class="dsh-equation">Desktop = Instances + Runtime</p>
-      </section>
-
-      <section class="dsh-section dsh-section--center">
-        <p class="dsh-section__label">Capabilities</p>
-        <h2>Compose your desktop from instances</h2>
-        <p class="dsh-section__intro">
-          Multi-instance isolation, a cached Node + dsh runtime, and portable
-          packages — the three pieces you need to run harnesses locally, without
-          juggling terminals.
-        </p>
-        <div class="dsh-pillars">
-          <article class="dsh-pillar">
-            <span class="dsh-pillar__tag">Multi-instance</span>
-            <h3>Quad-pane layout</h3>
-            <p>
-              Open several dsh environments side by side. Drag tabs to split into
-              a 2×2 grid — each pane keeps its own process, port, and data.
-            </p>
-          </article>
-          <article class="dsh-pillar">
-            <span class="dsh-pillar__tag">Built-in runtime</span>
-            <h3>Node + dsh, cached locally</h3>
-            <p>
-              The first-run wizard downloads what you need into your data folder.
-              Later starts skip the wait — runtime stays ready on disk.
-            </p>
-          </article>
-          <article class="dsh-pillar">
-            <span class="dsh-pillar__tag">Portable packages</span>
-            <h3>Export &amp; import .dshpack</h3>
-            <p>
-              Ship presets, patches, and settings as one file. Import through
-              the sidebar with optional machine-bound or password protection.
-            </p>
-          </article>
-        </div>
-      </section>
-
-      <section class="dsh-section--band">
-        <div class="dsh-section__inner">
-          <p class="dsh-section__label">Design approach</p>
-          <h2>Isolated by default.<br />Portable by design.</h2>
-
-          <div class="dsh-feature">
-            <div class="dsh-feature__copy">
-              <h3>See more than one harness at once</h3>
-              <p>
-                Open instances from the sidebar, then drag tabs to window edges to
-                split. Light and dark shell themes affect the helper UI only — not
-                the pages inside each harness.
-              </p>
+          <div class="dsh-hero__scenes">
+            <div class="dsh-hero__scene is-on">
+              <ul class="dsh-hero__panes">
+                <li>Support</li>
+                <li>Code</li>
+                <li>Tests</li>
+                <li>Orchestrate</li>
+              </ul>
             </div>
-            <figure class="dsh-media">
-              <img
-                src="../assets/en/screenshot-main-dark.png"
-                alt="Quad-pane layout in dark appearance"
-                width="1200"
-                height="750"
-                loading="lazy"
-              />
-              <figcaption class="dsh-media__caption">Dark shell · 2×2 quad-pane</figcaption>
-            </figure>
+            <div class="dsh-hero__scene">
+              <ul class="dsh-hero__panes">
+                <li>Build</li>
+                <li>Docs</li>
+                <li>Test</li>
+                <li>Review</li>
+              </ul>
+            </div>
+            <div class="dsh-hero__scene">
+              <ul class="dsh-hero__panes">
+                <li>Frontend</li>
+                <li>Backend</li>
+                <li>Tests</li>
+                <li>Package</li>
+              </ul>
+            </div>
           </div>
-
-          <div class="dsh-feature dsh-feature--reverse">
-            <div class="dsh-feature__copy">
-              <h3>Ship a configured workspace as one file</h3>
-              <p>
-                A <code>.dshpack</code> packages what teammates or clients need to
-                recreate an environment — export from instance details, import from
-                the sidebar wizard.
-              </p>
+          <div class="dsh-hero__legend">
+            <div class="dsh-hero__switch" aria-label="Work scenes">
+              <button type="button" class="is-on" data-scene="0" data-copy="Isolated plugins · one workspace · export when ready">One release</button>
+              <button type="button" data-scene="1" data-copy="Independent instances · one project folder · ship as a pack">One repo</button>
+              <button type="button" data-scene="2" data-copy="No plugin conflicts · side by side · one instance, one .dshpack">One instance</button>
             </div>
-            <figure class="dsh-media">
-              <img
-                src="../assets/en/screenshot-import.png"
-                alt="Import package dialog in DSHHelper"
-                width="900"
-                height="600"
-                loading="lazy"
-              />
-              <figcaption class="dsh-media__caption">Import dialog</figcaption>
-            </figure>
+            <p class="dsh-hero__caption">Isolated plugins · one workspace · export when ready</p>
           </div>
         </div>
       </section>
 
-      <section class="dsh-section">
-        <p class="dsh-section__label">Packages</p>
-        <h2>Export → share → import</h2>
-        <p class="dsh-section__intro">
-          The full flow from a configured instance to a workspace your team can
-          open on day one.
-        </p>
-        <figure class="dsh-media" style="margin-top: 40px">
-          <img
-            src="../assets/en/dshpack-flow.svg"
-            alt="Export and import flow for .dshpack packages"
-            width="720"
-            height="240"
-            loading="lazy"
-          />
-        </figure>
-        <div class="dsh-split" style="margin-top: 24px">
+      <section class="dsh-chapter" id="dsh-isolate" data-chapter="1">
+        <div class="dsh-chapter__inner">
+          <header class="dsh-chapter__head">
+            <p class="dsh-chapter__num"><span>01</span> Isolate</p>
+            <h2>One instance cannot host multiple workloads</h2>
+            <p class="dsh-chapter__promise">Unrelated plugins in one preset make the model call the wrong tools. Isolate the workloads first — then collaborate, then deliver.</p>
+          </header>
+          <div class="dsh-chapter__grid">
+            <div class="dsh-chapter__copy">
+              <p class="dsh-kicker">The problem</p>
+              <p>
+                Customer messages, code, and tests share one <code>DSH_HOME</code>.
+                The tool list grows until the model misroutes.
+                <strong>Three capability sets cannot coexist in one preset.</strong>
+              </p>
+              <p>
+                Agent presets do not resolve this: only one mounts per session, and switching after a turn is locked.
+              </p>
+              <p class="dsh-cite">
+                Per DeepSeek Harness:
+                <a href="https://deepseekdocs.com/en/docs/features/persona" rel="noopener noreferrer"
+                  >Agent Presets and Personas</a>
+              </p>
+              <p class="dsh-kicker">The approach</p>
+              <p>
+                <strong>Each instance is a complete, isolated dsh</strong> — own process, port, and
+                <code>DSH_HOME</code>. Create as many as you need. Plugin environments never conflict.
+                Isolate, then run in parallel, then package.
+              </p>
+            </div>
+            <aside class="dsh-callout">
+              <p class="dsh-callout__eq">One instance = one full dsh</p>
+              <ul>
+                <li>Own process</li>
+                <li>Own port</li>
+                <li>Own DSH_HOME</li>
+              </ul>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="dsh-chapter dsh-chapter--band" id="dsh-collab" data-chapter="2">
+        <div class="dsh-chapter__inner">
+          <header class="dsh-chapter__head">
+            <p class="dsh-chapter__num"><span>02</span> Collaborate</p>
+            <h2>Specialist instances, one workspace</h2>
+            <p class="dsh-chapter__promise">Plugin sets stay isolated. Project files stay in view. You orchestrate from the panes — a configured instance is ready to export.</p>
+          </header>
+          <div class="dsh-chapter__copy dsh-chapter__copy--wide">
+            <p>
+              Each instance is a specialist: support, engineering, testing. Plugins are its toolchain, so they must be isolated.
+            </p>
+            <p>
+              Spreading them across three machines is three separate environments — multiplied hardware, files copied back and forth, no shared state.
+              <strong>Place them on one computer, against the same project folder.</strong>
+              Not three unrelated windows — one workspace advancing one release.
+            </p>
+          </div>
+          <figure class="dsh-media dsh-media--diagram">
+            <img
+              src="../assets/en/collab-model.svg"
+              alt="Specialist instances: one workspace versus three separate machines"
+              width="720"
+              height="308"
+              loading="lazy"
+            />
+          </figure>
           <figure class="dsh-media">
             <img
-              src="../assets/en/screenshot-main-light.png"
-              alt="Quad-pane layout in light appearance"
+              src="../assets/en/screenshot-main-dark.png"
+              alt="Dark shell with a 2 by 2 quad-pane layout"
               width="1200"
               height="750"
               loading="lazy"
             />
-            <figcaption class="dsh-media__caption">Light shell · quad-pane</figcaption>
+            <figcaption class="dsh-media__caption">Orchestrate from the panes — shared folder, isolated plugins</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <aside class="dsh-mid-cta-band">
+        <div class="dsh-mid-cta">
+          <p>Shared folder. Isolated plugins. One workspace.</p>
+          <a
+            class="dsh-btn dsh-btn--primary"
+            href="https://github.com/x102201/deepseek-harness-helper/releases"
+            rel="noopener noreferrer"
+            >Download for desktop</a
+          >
+        </div>
+      </aside>
+
+      <section class="dsh-chapter" id="dsh-sell" data-chapter="3">
+        <div class="dsh-chapter__inner">
+          <header class="dsh-chapter__head">
+            <p class="dsh-chapter__num"><span>03</span> Monetize</p>
+            <h2>When the instance is ready, export the pack</h2>
+            <p class="dsh-chapter__promise">You deliver a runnable specialist instance — isolated and coached in one workspace, not another week of remote setup.</p>
+          </header>
+          <div class="dsh-chapter__copy dsh-chapter__copy--wide">
+            <p>
+              After configuring support, engineering, and testing, delivery often fails not on “can they use it”, but because
+              <strong>every handoff feels like rebuilding the project</strong>.
+            </p>
+          </div>
+          <ol class="dsh-pits">
+            <li>
+              <strong>Cannot reproduce</strong>
+              <span>Days later even you cannot confirm which plugins and which preset constitute the product.</span>
+            </li>
+            <li>
+              <strong>Cannot hand off</strong>
+              <span>A README never guarantees a clean install; shipping the folder invites redistribution.</span>
+            </li>
+            <li>
+              <strong>Cannot scale</strong>
+              <span>The next customer still requires the same remote setup. Delivery time dwarfs the time spent configuring.</span>
+            </li>
+          </ol>
+          <div class="dsh-chapter__copy dsh-chapter__copy--wide">
+            <p>
+              A <code>.dshpack</code> encapsulates that configured instance as a file. They import and run.
+              Bind a machine code or password; forbid re-export. Configure several instances, export several packs.
+            </p>
+          </div>
+          <figure class="dsh-media dsh-media--diagram">
+            <img
+              src="../assets/en/dshpack-flow.svg"
+              alt="Export and import flow for .dshpack packages"
+              width="720"
+              height="240"
+              loading="lazy"
+            />
           </figure>
           <figure class="dsh-media">
+            <img
+              src="../assets/en/screenshot-import.png"
+              alt="Import package dialog in DSHHelper"
+              width="900"
+              height="600"
+              loading="lazy"
+            />
+            <figcaption class="dsh-media__caption">Import a pack — they receive a runnable instance, not a setup ticket</figcaption>
+          </figure>
+        </div>
+      </section>
+
+      <section class="dsh-section dsh-section--band dsh-start">
+        <div class="dsh-section__inner">
+          <div class="dsh-start__copy">
+            <p class="dsh-section__label">Get started</p>
+            <h2>Install the app. Create instances.</h2>
+            <p class="dsh-section__intro">
+              Windows, macOS, and Linux. The wizard pulls the runtime. Then you split panes.
+            </p>
+            <ol class="dsh-steps">
+              <li>
+                <strong>Install</strong>
+                <span>Download the build for your platform from Releases.</span>
+              </li>
+              <li>
+                <strong>Initialize</strong>
+                <span>Choose a data folder, pull the runtime, create the first instance.</span>
+              </li>
+              <li>
+                <strong>Split</strong>
+                <span>Create more instances. Drag tabs to the edges. Run them in one workspace.</span>
+              </li>
+            </ol>
+            <div class="dsh-cta-row">
+              <a
+                class="dsh-btn dsh-btn--primary"
+                href="https://github.com/x102201/deepseek-harness-helper/releases"
+                rel="noopener noreferrer"
+                >Download for desktop</a
+              >
+              <a
+                class="dsh-btn dsh-btn--ghost"
+                href="https://github.com/x102201/deepseek-harness-helper"
+                rel="noopener noreferrer"
+                >View repository</a
+              >
+            </div>
+            <p class="dsh-proof">Free download · not code-signed yet · runtime downloads on first run</p>
+            <button
+              type="button"
+              class="dsh-release-note"
+              data-copy-url="https://github.com/x102201/deepseek-harness-helper/releases"
+              aria-label="Copy GitHub Releases URL"
+            >
+              <span class="dsh-release-note__url">github.com/x102201/deepseek-harness-helper/releases</span>
+              <span class="dsh-release-note__hint">Copy</span>
+            </button>
+          </div>
+          <figure class="dsh-media dsh-start__shot">
             <img
               src="../assets/en/screenshot-wizard.png"
               alt="First-run wizard in DSHHelper"
@@ -212,73 +322,26 @@
         </div>
       </section>
 
-      <section class="dsh-section dsh-section--band dsh-start">
-        <div class="dsh-section__inner">
-          <p class="dsh-section__label">Get started</p>
-          <h2>Try it now on your machine</h2>
+      <section class="dsh-close">
+        <div class="dsh-close__inner">
+          <p class="dsh-section__label">Next</p>
+          <h2>From isolation to delivery,<br />on one desktop.</h2>
           <p class="dsh-section__intro">
-            Installers ship on GitHub Releases for Windows, macOS, and Linux.
+            Isolate the workloads. Collaborate in one workspace. Package a configured instance as a .dshpack.
           </p>
-          <ol class="dsh-steps">
-            <li>
-              <strong>Install</strong>
-              <span>Download the build for your platform from Releases.</span>
-            </li>
-            <li>
-              <strong>Wizard</strong>
-              <span>Pick a data directory, pull the runtime, create the first instance.</span>
-            </li>
-            <li>
-              <strong>Quad-pane</strong>
-              <span>Add instances and drag tabs into a 2×2 layout.</span>
-            </li>
-          </ol>
-          <button
-            type="button"
-            class="dsh-release-note"
-            data-copy-url="https://github.com/x102201/deepseek-harness-helper/releases"
-            aria-label="Copy GitHub Releases URL"
-          >
-            <span class="dsh-release-note__url">github.com/x102201/deepseek-harness-helper/releases</span>
-            <span class="dsh-release-note__hint">Copy</span>
-          </button>
           <div class="dsh-cta-row">
             <a
               class="dsh-btn dsh-btn--primary"
               href="https://github.com/x102201/deepseek-harness-helper/releases"
               rel="noopener noreferrer"
-              >Get the app</a
-            >
-            <a
-              class="dsh-btn dsh-btn--ghost"
-              href="https://www.deepseek.com/harness/"
-              rel="noopener noreferrer"
-              >About DeepSeek Harness</a
+              >Download for desktop</a
             >
           </div>
+          <nav class="dsh-meta" aria-label="Page links">
+            <a href="../../../">← Back to home</a>
+            <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文详情</a>
+          </nav>
         </div>
-      </section>
-
-      <section class="dsh-section dsh-close">
-        <p class="dsh-section__label">Built for DeepSeek Harness</p>
-        <h2>Harness inside every tab.<br />One desktop to run them all.</h2>
-        <p class="dsh-section__intro">
-          Documentation and installers live in the public repository. Inside each
-          tab you still get the DeepSeek Harness experience — DSHHelper keeps the
-          instances running together.
-        </p>
-        <div class="dsh-cta-row" style="justify-content: center; margin-top: 32px">
-          <a
-            class="dsh-btn dsh-btn--primary"
-            href="https://github.com/x102201/deepseek-harness-helper"
-            rel="noopener noreferrer"
-            >View repository</a
-          >
-        </div>
-        <nav class="dsh-meta" aria-label="Page links">
-          <a href="../../../">← Back to home</a>
-          <a href="zh/" data-lang-switch="zh" hreflang="zh-CN">中文详情</a>
-        </nav>
       </section>
     </main>
 
@@ -293,7 +356,7 @@
 
     <script src="../../../js/projects.js"></script>
     <script src="../../../js/nav.js"></script>
-    <script src="detail.js"></script>
     <script src="../particles.js"></script>
+    <script src="detail.js"></script>
   </body>
 </html>

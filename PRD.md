@@ -32,12 +32,12 @@
   → 也可在顶栏直接点击项目名，快速滚动到对应横幅
   → 点击某一横幅
   → 进入该项目对应语言的独立详情页
-  → 阅读介绍后点击「View repo」/「查看仓库」跳转 GitHub
+  → 阅读介绍后点击「下载安装包」/「Download for desktop」试用，或「查看仓库」/「View repository」跳转 GitHub
   → 或点击返回回到同语言首页
   → 可随时通过顶栏切换 EN / 中文（写入偏好，并跳到对应语言的平行页面）
 ```
 
-核心转化目标：访客理解项目 → 进入对应 GitHub 仓库。
+核心转化目标：访客理解项目 → 愿意试用（安装包 / Releases）或进入对应 GitHub 仓库。
 
 ---
 
@@ -113,7 +113,7 @@ EN 详情 ←—— 语言切换 ——→ 中文详情（同一项目）
 │       ├── banner/
 │       │   ├── en/            # 英文横幅源（HTML / CSS / 资源）
 │       │   └── zh/            # 中文横幅源
-│       ├── particles.js       # 可选：项目级粒子背景（勿放全站 js/）
+│       ├── particles.js       # 可选：项目级氛围粒子（勿放全站 js/；不做鼠标跟随）
 │       ├── particles.css      # 可选：粒子层样式（勿覆盖顶栏 sticky）
 │       └── detail/
 │           ├── index.html     # 英文详情（默认 URL）
@@ -205,7 +205,7 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 
 **注意：**
 
-- 项目级 `particles.css` **不得**将 `.site-nav` 设为 `position: relative`，否则会覆盖 sticky 失效。
+- 项目级样式（含可选的 `particles.css`）**不得**将 `.site-nav` 设为 `position: relative`，否则会覆盖 sticky 失效。
 - 顶栏高度宜紧凑（约 40px 栏高 + 8px 顶留白），避免占过多视口。
 
 ### 5.2 首页（`index.html` / `zh/index.html`）
@@ -220,7 +220,8 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 - 仅服务对应语言首页的展示与导流。
 - 可自有样式与资源；class 建议带项目前缀（如 `.banner-card-duel`）。
 - 每种语言横幅都需考虑手机与桌面布局。
-- 若需粒子背景：**canvas 必须放在横幅容器内部**（如 `#banner-{id}` 的首个子元素），横幅背景勿用不透明实色盖住 canvas；首页在 `index.html` / `zh/index.html` 引入该项目的 `particles.js` / `particles.css`。
+- 横幅应在数秒内讲清「这是什么、为什么值得点进去」；可用入场 / hover 等页面动效。粒子若使用，必须是氛围漂浮，**不要**用鼠标跟随粒子当主视觉。
+- 若某项目仍要粒子背景（默认不做）：**canvas 必须放在横幅容器内部**（如 `#banner-{id}` 的首个子元素），横幅背景勿用不透明实色盖住 canvas。
 
 ### 5.4 详情 `projects/{id}/detail/` 与 `detail/zh/`
 
@@ -233,19 +234,31 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
   4. 引入 `css/base.css` 与 `js/nav.js`（详情模式），可用自有样式覆盖；
   5. 手机与电脑均可正常阅读与操作。
 
-**可选交互（`detail.js` + `detail.css`，首期 DSHHelper 已采用）：**
+**可选交互（`detail.js` + `detail.css`，DSHHelper 已采用）：**
 
-- 区块滚动显现（`Intersection Observer`）；`prefers-reduced-motion: reduce` 时跳过动画。
-- 截图 / 卡片 hover 反馈；步骤区编号与高亮。
+- 区块滚动显现（`Intersection Observer`）；章节编号高亮、左右滑入、步骤区点亮。
+- 截图 / 卡片 hover 反馈（抬起、轻缩放），不以循环闪烁 CTA 干扰阅读。
 - Releases 等外链可做成「点击复制」按钮。
-- 引入顺序建议：`projects.js` → `nav.js` → `detail.js` → 项目 `particles.js`（若有）。
+- 引入顺序建议：`projects.js` → `nav.js` → `detail.js`。
+- `prefers-reduced-motion: reduce` 时跳过入场与 hover 位移动画。
 
-**项目级粒子（可选，非全站）：**
+**页面动效与粒子：**
 
-- 文件位于 `projects/{id}/particles.js`、`particles.css`；详情页 canvas 挂于 `<body>` 下，须 `pointer-events: none`。
-- 鼠标互动**仅**作用于 Hero / 横幅文案区，**不要**绑定全页或截图区域，以免拖慢图片 hover / 点击。
-- `particles.css` 仅提升 `main` / `.site-main` 的层级，**勿**改动顶栏定位。
-- 尊重 `prefers-reduced-motion`：应移除 canvas 或停用动画。
+- **优先页面动效：** CSS 入场、滚动显现、hover 反馈。
+- DSHHelper 使用氛围粒子（`particles.js` / `particles.css`）：横幅内嵌 canvas，详情页 canvas 挂于 `<body>` 下且 `pointer-events: none`。**不做鼠标跟随 / 斥力 / 光晕。**
+- 减少动态效果时移除 canvas。**勿**改顶栏定位。
+
+#### 5.4.1 DSHHelper 内容约定（故事型推广）
+
+横幅与详情按源仓库 README 的三节拍写结构，但**官网用词须比仓库更正式、更产品化**，不照搬 README 口语（如「活」「桌子」「磨」「踩」）：
+
+1. **隔离** — 单一实例无法承载多套业务；一实例 = 独立进程 / 端口 / `DSH_HOME`。
+2. **协同** — 专职实例在同一工作区并行，而非分散到多台电脑。
+3. **变现** — 实例就绪后导出 `.dshpack` 交付。
+
+- 横幅：痛点标题 + 三节拍标签（隔离 / 协同 / 变现，作为产品定位，不当场次名）+ 融汇场景叠在截图上（同一份交付 / 同一份仓库 / 同一套实例）；整卡点击进详情。场景可鼠标切换。
+- 详情：Hero 承诺 → 节拍导航 → 三章故事 → 开始使用（主 CTA 指向 GitHub Releases）。
+- 安装细节链到仓库，不把用户指南整页搬上官网。
 
 ---
 
@@ -259,7 +272,7 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 | 横幅点击进入同语言 `detail` | 每个详情页的章节与布局（中英可不同） |
 | 顶栏三块：站点名 / 内容导航 / 语言切换 | 配色、字体覆盖、动效、素材 |
 | 内容导航：首页随滚动高亮，详情固定当前项 | 项目内 banner / detail 样式与动效 |
-| 顶栏胶囊条 + 滚动后玻璃态（§5.1.2） | 是否使用项目级粒子 / detail.js |
+| 顶栏胶囊条 + 滚动后玻璃态（§5.1.2） | 是否使用 detail.js / 项目级动效 |
 | `base.css` 断点与安全边距 | 各页具体文案 |
 | 双语平行页；语言优先级：偏好 > 浏览器 > 英文 | — |
 
@@ -280,7 +293,7 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 - 横幅点击、返回、**语言切换**在手机与桌面均可用，且切换后仍停留在同一项目的平行页（详情）或对应语言首页。
 - **内容导航：** 首页滚动时高亮随当前横幅变化；详情页滚动时高亮不变；顶栏点击可正确跳转（首页 → 锚点滚动，详情 → 同语言其他项目详情）。
 - **顶栏：** 滚动前后透明 / 玻璃态切换正常；内容导航在站点名右侧、顺序与横幅一致。
-- **动效（若启用）：** 粒子不挡点击；减少动态效果系统下无粒子或无不必要动画。
+- **动效（若启用）：** 不挡点击；减少动态效果系统下无不必要动画；DSHHelper 粒子为氛围漂浮，无鼠标跟随。
 
 ---
 
@@ -304,14 +317,14 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 3. 将英文横幅挂到 `index.html`，中文横幅挂到 `zh/index.html`，每条横幅设置锚点 `id="banner-{id}"`，链接到各自详情路径。
 4. 在 `js/projects.js` 登记 `id`、中英标题与路径。
 5. 确认顶栏内容导航能列出新项目；首页滚动联动与详情页固定当前项行为正常。
-6. 若使用粒子：确认 canvas 在横幅内或详情 body 下、`pointer-events: none`、顶栏 sticky 未被覆盖。
+6. 若使用页面动效：确认 `prefers-reduced-motion` 下可关；不挡点击。粒子若启用，须为氛围漂浮、无鼠标跟随。
 7. 按第 6.3 节做双端 + 双语检查。
 
 ### 7.3 首批上架项目
 
 | id | 标题（EN） | 标题（ZH） | 仓库 | 状态 |
 |----|------------|------------|------|------|
-| `dsh-helper` | DSHHelper | DSHHelper | https://github.com/x102201/deepseek-harness-helper | 已上架 |
+| `dsh-helper` | DSHHelper | DSHHelper | https://github.com/x102201/deepseek-harness-helper | 已上架（故事型推广页：隔离 / 协同 / 变现） |
 
 ---
 
@@ -348,3 +361,4 @@ site-nav-shell          # sticky 外层，顶部留白，pointer-events: none
 | 2026-08-27 | 首批上架 `dsh-helper`（DSHHelper）及仓库地址 |
 | 2026-08-27 | 顶栏增加内容导航：首页随滚动切换高亮，详情页固定当前项目 |
 | 2026-08-27 | 顶栏改为 Harness 式胶囊条；补充项目级粒子、detail.js 与实现注意事项 |
+| 2026-09-02 | DSHHelper 场景改为三节拍融汇；氛围粒子（无鼠标跟随）；去掉「桌子」口语；详情页节拍导航与场景切换 |

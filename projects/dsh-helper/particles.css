@@ -1,4 +1,4 @@
-/* DSHHelper-only particle layer */
+/* DSHHelper-only ambient particle layer */
 body:has(.dsh-helper-particles) {
   position: relative;
 }
@@ -16,7 +16,6 @@ body.dsh-detail:has(.dsh-helper-particles) .site-footer {
   isolation: isolate;
 }
 
-/* Detail page — full-viewport layer */
 body.dsh-detail > .dsh-helper-particles {
   position: fixed;
   inset: 0;
@@ -32,7 +31,6 @@ body.dsh-detail > .dsh-helper-particles {
   );
 }
 
-/* Home banner — embedded in banner box */
 .banner-dsh-helper .dsh-helper-particles {
   position: absolute;
   inset: 0;
